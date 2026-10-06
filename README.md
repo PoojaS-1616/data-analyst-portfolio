@@ -11,7 +11,7 @@ Business analytics projects by **Pooja Singh**, plus a roadmap for learning data
 | Project | Tools | Headline finding | |
 |---|---|---|---|
 | 🇮🇳 **Amazon India Business Performance** | Excel | Electronics drives **79% of sales** from 30% of orders; **9.85%** of orders are lost to returns and cancellations | [View →](./amazon-indian-business-dashboard-main) |
-| 🛒 **Supermart Grocery Sales** | Excel | Sales growth is accelerating (**+28.6%** in 2018) and **discounts show no link to profit** | 🔗 [View project & files](https://github.com/PoojaS-1616/data-analyst-portfolio/tree/main/Supermart-Grocery-Sales-Dashboard) |
+| 🛒 **Supermart Grocery Sales** | Excel | Sales growth is accelerating (**+28.6%** in 2018) and **discounts show no link to profit** | 🔗 [View ->](https://github.com/PoojaS-1616/data-analyst-portfolio/tree/main/Supermart-Grocery-Sales-Dashboard) |
 | 🛍️ **BlinkIT Grocery Sales Analysis** | Python · Pandas · Seaborn | *In progress* | Coming soon |
 
 ---
