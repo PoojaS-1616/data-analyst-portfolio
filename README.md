@@ -16,9 +16,7 @@ Business analytics projects by **Pooja Singh**, plus a roadmap for learning data
 
 ---
 
-## 🗺️ How to Learn Data Analysis: A Project-Based Roadmap
-
-## 🗺️ Data Analysis Learning Roadmap
+## 🗺️ Data Analysis Learning : A Project-Based Roadmap
 
 ```mermaid
 mindmap
