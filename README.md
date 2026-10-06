@@ -1,54 +1,116 @@
 # Data Analyst Portfolio
 
-Business analytics projects by **Pooja Singh**. Each project starts with a business question and ends with findings and recommendations.
+Business analytics projects by **Pooja Singh**, plus a roadmap for learning data analysis through projects.
 
 📫 [LinkedIn](https://www.linkedin.com/in/pooja-singh-data/) · ✉️ poojas.s199977@gmail.com
 
 ---
 
-## 📁 Projects
+## 📁 Project Highlights
 
-| # | Project | Tools | Key question |
+| Project | Tools | Headline finding | |
 |---|---|---|---|
-| 1 | [Amazon India Business Performance Dashboard](./amazon-india-dashboard) | Excel | Where do sales and profit come from, and how much revenue is lost to returns and cancellations? |
-| 2 | [Supermart Grocery Sales Dashboard](./supermart-grocery-dashboard) | Excel | What drives grocery sales and profit, and do discounts hurt margin? |
-| 3 | BlinkIT Grocery Sales Analysis | Python · Pandas · Seaborn | *In progress* |
+| 🇮🇳 **Amazon India Business Performance** | Excel | Electronics drives **79% of sales** from 30% of orders; **9.85%** of orders are lost to returns and cancellations | [View →](./amazon-india-dashboard) |
+| 🛒 **Supermart Grocery Sales** | Excel | Sales growth is accelerating (**+28.6%** in 2018) and **discounts show no link to profit** | [View →](./supermart-grocery-dashboard) |
+| 🛍️ **BlinkIT Grocery Sales Analysis** | Python · Pandas · Seaborn | *In progress* | Coming soon |
 
 ---
 
-## 🇮🇳 Amazon India Business Performance Dashboard
+## 🗺️ How to Learn Data Analysis: A Project-Based Roadmap
 
-[![Amazon India Dashboard](amazon-india-dashboard/Amazon_India_Dashboard_Preview.png)](./amazon-india-dashboard)
+Each stage builds on the one before it. Click a stage to expand it.
 
-**Data:** 10,000 orders, Jan 2024 – Aug 2026 · **₹15.58 crore** sales · **21.3%** margin
+```mermaid
+flowchart LR
+    A[1. Excel] --> B[2. Python]
+    B --> C[3. SQL]
+    C --> D[4. Visualization / BI]
+    D --> E[5. Statistics]
+    E --> F[6. Portfolio and storytelling]
+```
 
-- Electronics & Mobiles brings in **79% of sales from 30% of orders**.
-- **9.85%** of orders are returned or cancelled.
-- Maharashtra, Karnataka and Delhi contribute **49%** of sales.
+<details>
+<summary><b>Stage 1: Excel for analysis</b> &nbsp;✅ <i>projects in this repo</i></summary>
 
-👉 [View project](./amazon-india-dashboard)
+<br>
+
+**Learn:** formulas (`SUMIFS`, `COUNTIFS`, lookups), pivot tables, data cleaning, charts, dropdown filters, KPI cards.
+
+**Practice by building:** a one-page dashboard that answers a business question.
+
+**Example here:** [Amazon India dashboard](./amazon-india-dashboard) · [Supermart dashboard](./supermart-grocery-dashboard)
+
+</details>
+
+<details>
+<summary><b>Stage 2: Python for data analysis</b> &nbsp;🔄 <i>in progress</i></summary>
+
+<br>
+
+**Learn:** Pandas (loading, filtering, grouping), handling missing values and duplicates, outliers, Matplotlib and Seaborn charts.
+
+**Practice by building:** a full analysis notebook, from raw data to findings.
+
+**Example here:** BlinkIT Grocery Sales Analysis *(coming soon)*
+
+</details>
+
+<details>
+<summary><b>Stage 3: SQL for querying data</b> &nbsp;⬜ <i>next</i></summary>
+
+<br>
+
+**Learn:** `SELECT`, `WHERE`, `GROUP BY`, joins, subqueries, CTEs, window functions.
+
+**Practice by building:** answer the same business questions from a database instead of a spreadsheet.
+
+</details>
+
+<details>
+<summary><b>Stage 4: Data visualization and BI tools</b> &nbsp;⬜ <i>next</i></summary>
+
+<br>
+
+**Learn:** dashboard design, choosing the right chart, KPIs, filters, and keeping a dashboard readable for non-technical users.
+
+**Practice by building:** rebuild an existing dashboard in a BI tool such as Power BI.
+
+</details>
+
+<details>
+<summary><b>Stage 5: Statistics</b> &nbsp;⬜ <i>next</i></summary>
+
+<br>
+
+**Learn:** descriptive statistics, distributions, correlation, hypothesis testing, basic regression.
+
+**Practice by building:** test a claim from an earlier project, for example whether discounts really have no effect on profit.
+
+</details>
+
+<details>
+<summary><b>Stage 6: Portfolio and storytelling</b> &nbsp;🔄 <i>ongoing</i></summary>
+
+<br>
+
+**Learn:** turning findings into recommendations, writing clear READMEs, presenting to non-technical readers.
+
+**Practice by doing:** for every project, write **Problem → Insight → Recommendation**.
+
+</details>
 
 ---
 
-## 🛒 Supermart Grocery Sales Dashboard
+## 🧭 A Simple Habit for Every Project
 
-**Data:** 9,994 orders, 2015–2018 · **₹1.50 crore** sales · **25.1%** margin
-
-- Sales growth is accelerating: **+5.3%** (2016), **+23.6%** (2017), **+28.6%** (2018).
-- September and November are the strongest months every year.
-- Discount level shows **no link to profit** (correlation 0.008).
-
-👉 [View project](./supermart-grocery-dashboard)
+1. **Ask** a clear business question.
+2. **Clean** the data and note every assumption.
+3. **Explore** patterns with summaries and charts.
+4. **Explain** what the numbers mean in plain language.
+5. **Recommend** what the business should do next.
 
 ---
 
 ## 🛠️ Tools Used
 
-Excel (formula-driven dashboards, dropdown filters, KPI cards, charts) · Python (Pandas, NumPy, Matplotlib, Seaborn) · SQL · Git & GitHub
-
----
-
-## 📈 Coming Next
-
-- BlinkIT Grocery Sales Analysis in Python
-- Statistics and machine learning, moving toward data science
+Excel · Python (Pandas, NumPy, Matplotlib, Seaborn) · SQL · Git & GitHub
