@@ -64,7 +64,7 @@ A few things worth knowing:
 
 - Every order is in **Tamil Nadu**, so I did the geographic analysis at city and region level.
 - The dataset has **no product or SKU column**, so I used sub-category as the "product" level.
-- Order dates came in two formats. I explain how I handled them in [Data_Cleaning_Process.md](Data_Cleaning_Process.md).
+- Order dates came in two formats. I explained how I handled them in [Data_Cleaning_Process.md](Data_Cleaning_Process.md).
 
 ## Tools
 
