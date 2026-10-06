@@ -50,7 +50,7 @@ mindmap
 
 | Topic | Practice project |
 |---|---|
-| Excel | [Amazon India](./amazon-india-dashboard) · [Supermart](./supermart-grocery-dashboard) |
+| Excel | [Amazon India] · [Supermart] |
 | Python | BlinkIT Grocery Sales Analysis *(in progress)* |
 
 ---
