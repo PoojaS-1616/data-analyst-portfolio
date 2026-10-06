@@ -4,7 +4,7 @@ An Excel dashboard that turns 9,994 grocery orders into a single page that a non
 
 ## Dashboard Preview
 
-![Supermart Grocery Sales Dashboard](Supermart_Dashboard_Preview.png)
+![Supermart Grocery Sales Dashboard](Supermart_Grocery_Dashboard_Preview.png)
 
 ## What it answers
 
