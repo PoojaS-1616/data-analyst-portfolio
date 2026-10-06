@@ -1,6 +1,6 @@
 # Supermart Grocery Sales Dashboard
 
-An Excel dashboard that turns 9,994 grocery orders into a single page that a non-technical manager can filter by year, region and category, and read in a couple of minutes.
+An Excel dashboard that turns 9,994 grocery orders into a single page that you can filter by year, region and category, and read in a couple of minutes.
 
 ## Dashboard Preview
 
