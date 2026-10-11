@@ -23,9 +23,9 @@ Business analytics projects in Excel and Python that turn sales data into clear 
 ---
 
 ## Skills Used
-**Excel**: data cleaning, pivot tables, SUMIFS and COUNTIFS, charts and dashboards
-**Python**: Pandas, NumPy, Matplotlib, Seaborn (applied in the BlinkIT project below)
-**Tools**: Git and GitHub
+**Excel**: data cleaning, pivot tables, SUMIFS and COUNTIFS, charts and dashboards |
+**Python**: Pandas, NumPy, Matplotlib, Seaborn (applied in the BlinkIT project below) |
+**Tools**: Git and GitHub |
 
 ---
 
