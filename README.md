@@ -1,6 +1,6 @@
 # Data Analyst Portfolio
 
-Business analytics projects by **Pooja Singh**, plus a roadmap for learning data analysis through projects.
+Business analytics projects in Excel and Python that turn sales data into clear findings and recommendations.
 
 📫 [LinkedIn](https://www.linkedin.com/in/pooja-singh-data/) · ✉️ poojas.s199977@gmail.com
 
@@ -15,6 +15,27 @@ Business analytics projects by **Pooja Singh**, plus a roadmap for learning data
 | 🛍️ **BlinkIT Grocery Sales Analysis** | Python · Pandas · Seaborn | *In progress* | Coming soon |
 
 ---
+
+✅ done in this repo · 🔄 in progress · ⬜ next
+
+| Topic | Practice project |
+|---|---|
+| Excel | (Amazon India) · (Supermart) |
+| Python | BlinkIT Grocery Sales Analysis *(in progress)* |
+
+---
+
+## 🧭 My Approach to Every Project
+
+**Ask** a business question → **Clean** the data → **Explore** patterns → **Explain** in plain language → **Recommend** next steps
+
+---
+
+## Skills Used
+**Excel**: data cleaning, pivot tables, SUMIFS and COUNTIFS, charts and dashboards
+**Python**: Pandas, NumPy, Matplotlib, Seaborn (applied in the BlinkIT project below)
+**Tools**: Git and GitHub
+
 
 ## 🗺️ Data Analysis Learning : A Project-Based Roadmap
 
@@ -45,22 +66,3 @@ mindmap
       Business Problems to Insights to recommendation
       Clear READMEs
 ```
-
-✅ done in this repo · 🔄 in progress · ⬜ next
-
-| Topic | Practice project |
-|---|---|
-| Excel | [Amazon India] · [Supermart] |
-| Python | BlinkIT Grocery Sales Analysis *(in progress)* |
-
----
-
-## 🧭 My Approach to Every Project
-
-**Ask** a business question → **Clean** the data → **Explore** patterns → **Explain** in plain language → **Recommend** next steps
-
----
-
-## 🛠️ Tools Used
-
-Excel · Python (Pandas, NumPy, Matplotlib, Seaborn) · SQL · Git & GitHub
