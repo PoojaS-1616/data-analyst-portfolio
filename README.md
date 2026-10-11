@@ -16,15 +16,6 @@ Business analytics projects in Excel and Python that turn sales data into clear 
 
 ---
 
-✅ done in this repo · 🔄 in progress · ⬜ next
-
-| Topic | Practice project |
-|---|---|
-| Excel | (Amazon India) · (Supermart) |
-| Python | BlinkIT Grocery Sales Analysis *(in progress)* |
-
----
-
 ## 🧭 My Approach to Every Project
 
 **Ask** a business question → **Clean** the data → **Explore** patterns → **Explain** in plain language → **Recommend** next steps
@@ -36,6 +27,7 @@ Business analytics projects in Excel and Python that turn sales data into clear 
 **Python**: Pandas, NumPy, Matplotlib, Seaborn (applied in the BlinkIT project below)
 **Tools**: Git and GitHub
 
+---
 
 ## 🗺️ Data Analysis Learning : A Project-Based Roadmap
 
@@ -66,3 +58,11 @@ mindmap
       Business Problems to Insights to recommendation
       Clear READMEs
 ```
+
+✅ done in this repo · 🔄 in progress · ⬜ next
+
+| Topic | Practice project |
+|---|---|
+| Excel | (Amazon India) · (Supermart) |
+| Python | BlinkIT Grocery Sales Analysis *(in progress)* |
+---
