@@ -59,7 +59,7 @@ mindmap
       Clear READMEs
 ```
 
-✅ done in this repo · 🔄 in progress · ⬜ next
+I am building my skills project by project ✅ done in this repo · 🔄 in progress · ⬜ next
 
 | Topic | Practice project |
 |---|---|
