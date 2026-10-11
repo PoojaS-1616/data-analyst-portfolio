@@ -42,7 +42,7 @@ mindmap
       Correlation
       Hypothesis testing
     Portfolio 🔄
-      Problem to insight to recommendation
+      Business Problems to Insights to recommendation
       Clear READMEs
 ```
 
