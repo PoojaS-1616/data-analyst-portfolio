@@ -78,7 +78,7 @@ If the raw data changes, the numbers and charts update on their own.
 
 1. Download `Amazon_India_Business_Performance_Dashboard.xlsx` from this repository.
 2. Open it in Excel and go to the **Dashboard** sheet.
-3. To try your own data, paste it into `Raw_Data` using the same columns, including `Order_Month` in the format `YYYY-MM`.The formulas stop at row 10,001, so if you add more orders, extend the ranges in the helper sheets and Dashboard too. Keep the same categories, states and months, or add new ones to the helper sheets.
+3. To try your own data, paste it into `Raw_Data` using the same columns, including `Order_Month` in the format `YYYY-MM`. The formulas stop at row 10,001, so if you add more orders, extend the ranges in the helper sheets and Dashboard too. Keep the same categories, states and months, or add new ones to the helper sheets.
 4. Press Ctrl + Alt + F9 to recalculate if the numbers do not refresh.
 
 ## What I learned
