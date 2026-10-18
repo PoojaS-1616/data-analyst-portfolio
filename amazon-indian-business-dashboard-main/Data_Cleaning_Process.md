@@ -26,10 +26,10 @@ I checked Quantity, Unit Price, Discount, Sales and Profit for blanks, text ente
 
 **Text columns.**
 
-I checked Category, Product, Payment Method, Fulfilment, Order Status and State for stray spaces and inconsistent spellings. These can make one item look like two, for example "UPI" and "UPI".The values were consistent, so each group adds up correctly.
+I checked Category, Product, Payment Method, Fulfilment, Order Status and State for stray spaces and inconsistent spellings. These can make one item look like two, for example "UPI" and "UPI". The values were consistent, so each group adds up correctly.
 
-- **Categories:**- Electronics & Mobiles, Home & Kitchen, Apparel & Fashion, Beauty & Personal Care, Pantry & Groceries
-- **Order statuses:**-  Delivered, Shipped, Returned, Cancelled
+- **Categories:** Electronics & Mobiles, Home & Kitchen, Apparel & Fashion, Beauty & Personal Care, Pantry & Groceries
+- **Order statuses:** Delivered, Shipped, Returned, Cancelled
 
 ## The one problem I found: dates stored as text
 
