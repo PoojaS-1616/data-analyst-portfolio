@@ -11,8 +11,7 @@ Business analytics projects in Excel and Python that turn sales data into clear 
 | Project | Tools | Headline finding | Link |
 |---|---|---|---|
 | 🇮🇳 **Amazon India Business Performance** | Excel | Electronics drives **79% of sales** from 30% of orders; **9.85%** of orders are lost to returns and cancellations | [Open Project →](./amazon-indian-business-dashboard-main) |
-| 🛒 **Supermart Grocery Sales** | Excel | Sales growth is accelerating (**+28.6%** in 2018) and **discounts show no link to profit** | [Open Project →](https://github.com/PoojaS-1616/data-analyst-portfolio/tree/main/Supermart-Grocery-Sales-Dashboard) |
-| 🛍️ **BlinkIT Grocery Sales Analysis** | Python · Pandas · Seaborn | *In progress* | Coming soon |
+| 🛒 **Supermart Grocery Sales** | Excel | Sales growth is accelerating (**+28.6%** in 2018) and **discounts show no link to profit** | [Open Project →](./Supermart-Grocery-Sales-Dashboard) |
 
 ---
 
@@ -63,6 +62,6 @@ I am building my skills project by project ✅ done in this repo · 🔄 in prog
 
 | Topic | Practice project |
 |---|---|
-| Excel | (Amazon India) · (Supermart) |
+| Excel |[Amazon India](./amazon-indian-business-dashboard-main) · [Supermart](./Supermart-Grocery-Sales-Dashboard) |
 | Python | BlinkIT Grocery Sales Analysis *(in progress)* |
 ---
