@@ -31,7 +31,7 @@ Sales and profit by region and city.
 - **November** is one of the two strongest months every year, and **September** is also a top-three month in 2015, 2016 and 2018. September 2018 was the best month overall (₹5.9 lakh).
 - No single category dominates. The seven categories each hold between **13.6% and 15.2%** of sales.
 - **West** is the largest region (32% of sales) and **South** the smallest (16%), but South has the best margin (25.6%) among the larger regions (the single North order is excluded).
-**Discounts show no link to profit.** The correlation with profit is about 0.00 (0.000), and with profit margin 0.008. Margin stays between 24.8% and 25.7% in every discount band.
+- **Discounts show no link to profit.** The correlation with profit is about 0 (0.000), and with profit margin 0.008. Margin stays between 24.8% and 25.7% in every discount band.
 - A few items with above-median sales have slightly weaker margins, such as **Spices (23.8%)**, **Masalas (24.2%)** and **Cakes (24.6%)**. Margins are tightly clustered across the range, so these gaps are small.
 
 ## What I would recommend
