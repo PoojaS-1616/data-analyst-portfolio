@@ -28,11 +28,11 @@ Sales and profit by region and city.
 
 - The business booked about **₹1.50 crore** in sales and **₹37.5 lakh** in profit, a margin of roughly **25%**.
 - Sales grew every year, and growth is speeding up: **+5.3%** in 2016, **+23.6%** in 2017 and **+28.6%** in 2018.
-- **September and November** are the strongest months every year. September 2018 was the best month overall (₹5.9 lakh).
+- **November** is one of the two strongest months every year, and **September** is also a top-three month in 2015, 2016 and 2018. September 2018 was the best month overall (₹5.9 lakh).
 - No single category dominates. The seven categories each hold between **13.6% and 15.2%** of sales.
-- **West** is the largest region (32% of sales) and **South** the smallest (16%), but South has the best margin (25.6%).
-- **Discounts show no link to profit.** The correlation is close to zero (0.008), and margin stays between 24.8% and 25.7% in every discount band.
-- A few high-sales items have slightly weaker margins, such as **Spices (23.8%)**, **Masalas (24.2%)** and **Cakes (24.6%)**. Margins are tightly clustered across the range, so these gaps are small.
+- **West** is the largest region (32% of sales) and **South** the smallest (16%), but South has the best margin (25.6%) among the larger regions (the single North order is excluded).
+**Discounts show no link to profit.** The correlation with profit is about 0.00 (0.000), and with profit margin 0.008. Margin stays between 24.8% and 25.7% in every discount band.
+- A few items with above-median sales have slightly weaker margins, such as **Spices (23.8%)**, **Masalas (24.2%)** and **Cakes (24.6%)**. Margins are tightly clustered across the range, so these gaps are small.
 
 ## What I would recommend
 
@@ -56,7 +56,7 @@ I added three dropdown filters (Year, Region and Category) so the KPIs and most 
 
 ## The dataset
 
-9,994 orders from 2015 to 2018, across 7 categories, 21 sub-categories and 23 cities.
+9,994 orders from 2015 to 2018, across 7 categories, 23 sub-categories and 24 cities.
 
 Each row contains the order ID, customer name, category, sub-category, city, order date, region, state, sales, discount and profit. I added Year, Month and Profit Margin columns to support the analysis.
 
