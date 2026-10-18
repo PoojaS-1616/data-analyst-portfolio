@@ -32,7 +32,7 @@ Sales and profit by payment method and fulfilment method, and sales, profit and 
 * **The losses are spread evenly:** return and cancellation rates sit between about 8.8% and 10.6% in every category. Electronics accounts for most of the rupee loss (about ₹1.24 crore of ₹1.56 crore) because it has the highest sales.
 * **Sales are flat year on year:** about ₹5.70 crore in 2024 and ₹5.74 crore in 2025, a rise of under 1%.
 * **Payments and fulfilment:** UPI is the most used payment method at about 50% of sales. Amazon-fulfilled (FBA) orders account for about 69% of sales.
-* **Geography:** Maharashtra, Karnataka and Delhi together contribute about 49% of sales.
+* **Geography:** Maharashtra, Karnataka and Delhi together contribute about 49% of sales.(2026 covers January to August only, so it is not compared.)
 
 ## Recommendations 
 
@@ -43,7 +43,7 @@ Sales and profit by payment method and fulfilment method, and sales, profit and 
 
 ## How it's built
 
-The dashboard driven by formulas. The `Raw_Data` sheet holds the orders, small helper sheets summarise them with SUMIFS and COUNTIFS, and the dashboard's KPIs and charts read from those helpers.
+The dashboard is driven by formulas. The `Raw_Data` sheet holds the orders, small helper sheets summarise them with SUMIFS and COUNTIFS, and the dashboard's KPIs and charts read from those helpers.
 
 If the raw data changes, the numbers and charts update on their own.
 
@@ -56,7 +56,7 @@ If the raw data changes, the numbers and charts update on their own.
 | Payment_Analysis, Fulfillment_Analysis, State_Analysis       | Summary tables behind section 4                       |
 ---
 
-- **What updates automatically:** if order values change, the totals and charts recalculate. The formulas read Raw_Data rows 2 to 100,000.
+- **What updates automatically:** if order values change, the totals and charts recalculate. The formulas read Raw_Data rows 2 to 10,001.
 
 - **What does not:** the lists of months, categories, products, payment methods and states are typed in, so new categories or states must be added by hand. The Top 10 products list is also typed in and will not re-rank by itself.
 
@@ -76,9 +76,9 @@ If the raw data changes, the numbers and charts update on their own.
 
 ## Using it
 
-1. Download `Amazon_India_Business_Performance_Dashboard_main.xlsx` from this repository.
+1. Download `Amazon_India_Business_Performance_Dashboard.xlsx` from this repository.
 2. Open it in Excel and go to the **Dashboard** sheet.
-3. To try your own data, paste it into `Raw_Data` using the same columns, including `Order_Month` in the format `YYYY-MM`. Keep the same categories, states and months, or add new ones to the helper sheets.
+3. To try your own data, paste it into `Raw_Data` using the same columns, including `Order_Month` in the format `YYYY-MM`.The formulas stop at row 10,001, so if you add more orders, extend the ranges in the helper sheets and Dashboard too. Keep the same categories, states and months, or add new ones to the helper sheets.
 4. Press Ctrl + Alt + F9 to recalculate if the numbers do not refresh.
 
 ## What I learned
