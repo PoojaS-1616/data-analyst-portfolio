@@ -1,37 +1,186 @@
 # Pooja Singh | Data Analytics Portfolio
 
-Welcome to my Data Analytics Portfolio! This repository documents my hands-on projects, learning progress, statistical concepts, and practical exploration of data.
+Business analytics projects that turn raw sales data into clear findings and recommendations, built with Excel, Python and SQL.
 
-## 📊 Learning Progress
+📫 [LinkedIn](https://www.linkedin.com/in/pooja-singh-data/) · ✉️ poojas.s199977@gmail.com · 🐙 [GitHub](https://github.com/PoojaS-1616)
 
-I track my progress as I develop my data analytics skills through practice, projects, and continuous learning.
+---
+
+## 📂 Projects
+
+| Project | Tools | Headline finding | Link |
+|---|---|---|---|
+| 🇮🇳 **Amazon India Business Performance** | Excel | Electronics drives **79% of sales** from 30% of orders; **9.85%** of orders are lost to returns and cancellations | [Open project →](./amazon-indian-business-dashboard-main) |
+| 🛒 **Supermart Grocery Sales** | Excel | Sales growth is accelerating (**+28.6%** in 2018) and **discounts show no link to profit** | [Open project →](./Supermart-Grocery-Sales-Dashboard) |
+| 🛍️ **BlinkIT Grocery Pricing & Catalogue** | Python, pandas, SciPy, SQL, Streamlit | The `Sales` column behaves like **item price, not units sold**: the item explains **99.97%** of its variance | [Open project →](./BlinkIT-Grocery-Sales-Analysis) |
+
+### 1. Amazon India Business Performance Dashboard
+
+- 10,000 orders turned into one formula-driven Excel dashboard: 6 KPIs, 9 charts, 4 business questions.
+- Finds heavy dependence on one category (Electronics, 79% of sales) and a 9.85% loss rate that is similar in every category.
+- Ends with data-driven recommendations on diversification, returns and growth.
+
+### 2. Supermart Grocery Sales Dashboard
+
+- 9,994 orders with Year, Region and Category dropdown filters that update the KPIs and charts.
+- Shows sales growing every year, November as a peak month, and no link between discount level and profit.
+- Flags sub-categories with high sales but below-average margin.
+
+### 3. BlinkIT Grocery Pricing & Catalogue Analysis
+
+- 8,523 product–outlet records across 10 outlets, analysed in Python with a documented cleaning process.
+- Variance decomposition shows `Sales` reflects item price, which reframes every other result.
+- Includes a SQL star-schema warehouse and a Streamlit decision dashboard.
+
+---
+
+## 🗺️ My data analytics map
 
 ```mermaid
-xychart-beta
-    title "My Learning Progress (%)"
-    x-axis ["Statistics", "Python", "SQL", "Excel", "Visualization"]
-    y-axis "Progress" 0 --> 100
-    bar [35, 45, 30, 55, 40]
+%%{init: {'theme': 'base', 'themeVariables': {
+  'fontSize': '16px',
+  'git0': '#dbeafe', 'gitBranchLabel0': '#1e3a5f',
+  'cScale0': '#dbeafe', 'cScaleLabel0': '#1e3a5f',
+  'cScale1': '#d9f5e5', 'cScaleLabel1': '#14532d',
+  'cScale2': '#e0ecff', 'cScaleLabel2': '#17365d',
+  'cScale3': '#fdf0d5', 'cScaleLabel3': '#6b4a0b',
+  'cScale4': '#ece6fb', 'cScaleLabel4': '#3c3489',
+  'cScale5': '#fde4ec', 'cScaleLabel5': '#72243e',
+  'cScaleInv0': '#93c5fd', 'cScaleInv1': '#86d4a8', 'cScaleInv2': '#a9c7f5',
+  'cScaleInv3': '#f0cf8f', 'cScaleInv4': '#c4b8f0', 'cScaleInv5': '#f3b3c9',
+  'lineColor': '#9aa7b8'
+}}}%%
+mindmap
+  root((Data analytics))
+    Excel
+      Data cleaning
+      SUMIFS and COUNTIFS
+      Helper sheets
+      Dropdown filters
+      Charts and dashboards
+    Python
+      pandas cleaning
+      Missing value imputation
+      Matplotlib and Seaborn
+      Plotly and Streamlit
+      Problem solving
+    SQL
+      Star schema design
+      Joins and aggregations
+      Views
+      Window functions and CTEs
+    Statistics
+      Descriptive statistics
+      Correlation
+      Variance decomposition
+      Kruskal-Wallis test
+      Hypothesis testing
+      Regression
+    Business analytics
+      KPIs
+      Segment analysis
+      Recommendations
 ```
 
-*Note: The percentages are initial examples. Update them to reflect your actual progress.*
+**How every project flows:** ask a business question → clean the data → analyse → visualise → recommend next steps.
 
-## 🧠 Statistics & Probability
+| Branch | See it in |
+|---|---|
+| Excel | [Amazon India](./amazon-indian-business-dashboard-main) · [Supermart](./Supermart-Grocery-Sales-Dashboard) |
+| Python, Statistics | [BlinkIT analysis](./BlinkIT-Grocery-Sales-Analysis) |
+| SQL | [BlinkIT SQL warehouse](./BlinkIT-Grocery-Sales-Analysis/blinkit_warehouse.sql) |
+| Business analytics | The findings and recommendations in each project README |
 
-Topics I am learning and practising:
+---
+
+## ☑️ Skill checklist
+
+- [x] Learned and used in a project
+- [ ] 🔄 In progress
+- [ ] To do
+
+<details open>
+<summary><strong>Excel</strong></summary>
+
+- [x] Data cleaning
+- [x] SUMIFS and COUNTIFS
+- [x] Helper sheets
+- [x] Dropdown filters
+- [x] Charts and dashboards
+
+</details>
+
+<details open>
+<summary><strong>Python</strong></summary>
+
+- [x] pandas cleaning
+- [x] Missing value imputation
+- [x] Matplotlib and Seaborn
+- [x] Plotly and Streamlit
+- [ ] 🔄 Problem solving
+
+</details>
+
+<details open>
+<summary><strong>SQL</strong></summary>
+
+- [x] Star schema design
+- [ ] 🔄 Joins and aggregations
+- [ ] 🔄 Views
+- [ ] Window functions and CTEs
+
+</details>
+
+<details open>
+<summary><strong>Statistics</strong></summary>
+
+- [x] Descriptive statistics
+- [x] Correlation
+- [x] Variance decomposition
+- [x] Kruskal-Wallis test
+- [ ] 🔄 Hypothesis testing
+- [ ] Regression
+
+</details>
+
+<details open>
+<summary><strong>Business analytics</strong></summary>
+
+- [x] KPIs
+- [x] Segment analysis
+- [x] Recommendations
+
+</details>
+
+---
+
+## 🛠️ Skills and where I used them
+
+| Skill | What I practise | Used in |
+|---|---|---|
+| Microsoft Excel | Data cleaning, SUMIFS and COUNTIFS, helper sheets, dropdown filters, charts, dashboards | Amazon India, Supermart |
+| Python (pandas, NumPy) | Cleaning, imputation, transformation | BlinkIT |
+| Statistics | Correlation, variance decomposition, Kruskal-Wallis test | BlinkIT, Supermart |
+| SQL | Star schema, joins, aggregations, views | BlinkIT |
+| Data visualisation | Charts, dashboards, Matplotlib, Seaborn, Plotly, Streamlit | All three |
+| Business analytics | KPIs, segment analysis, recommendations | All three |
+
+---
+
+## 🧠 Statistics and probability: what I am studying
 
 <details>
-<summary><strong>Descriptive Statistics</strong></summary>
+<summary><strong>Descriptive statistics</strong></summary>
 
-- Mean, median, and mode
+- Mean, median and mode
 - Variance and standard deviation
 - Quartiles and outliers
-- Data distributions and skewness
+- Distributions and skewness
 
 </details>
 
 <details>
-<summary><strong>Probability & Distributions</strong></summary>
+<summary><strong>Probability and distributions</strong></summary>
 
 - Basic and conditional probability
 - Random variables
@@ -41,7 +190,7 @@ Topics I am learning and practising:
 </details>
 
 <details>
-<summary><strong>Statistical Inference</strong></summary>
+<summary><strong>Statistical inference</strong></summary>
 
 - Population and sample
 - Sampling techniques
@@ -51,17 +200,17 @@ Topics I am learning and practising:
 </details>
 
 <details>
-<summary><strong>Hypothesis Testing</strong></summary>
+<summary><strong>Hypothesis testing</strong></summary>
 
 - Null and alternative hypotheses
 - P-values and significance levels
 - Type I and Type II errors
-- t-tests, chi-square tests, and ANOVA
+- t-tests, chi-square tests and ANOVA
 
 </details>
 
 <details>
-<summary><strong>Correlation & Regression</strong></summary>
+<summary><strong>Correlation and regression</strong></summary>
 
 - Correlation and covariance
 - Simple and multiple linear regression
@@ -70,130 +219,22 @@ Topics I am learning and practising:
 
 </details>
 
-## 🛠️ Skills & Technologies
+---
 
-| Skill | Areas of Practice |
-|---|---|
-| Python | Data manipulation and analysis |
-| Pandas | Data cleaning and transformation |
-| SQL | Queries, joins, and aggregations |
-| Microsoft Excel | Formulas, pivot tables, and dashboards |
-| Statistics | Descriptive statistics, probability, and inference |
-| Data Visualization | Charts, dashboards, and reporting |
-| Business Analytics | KPI analysis and business insights |
-
-## 🔄 My Interactive Learning Flowchart
-
-Explore my learning journey from data preparation to business insights. Click a topic in the rendered diagram to open its learning notes or project.
-
-```mermaid
-flowchart TD
-    A(["🚀 Start: Data Analytics"]) --> B["📊 Excel<br/>Data cleaning & PivotTables"]
-    A --> C["🗄️ SQL<br/>Queries, joins & aggregations"]
-
-    B --> D["🐍 Python & Pandas<br/>Data manipulation"]
-    C --> D
-
-    D --> E["📈 Statistics<br/>Probability & inference"]
-    E --> F["📉 Data Visualization<br/>Charts & dashboards"]
-    F --> G["💡 Business Analytics<br/>KPIs & insights"]
-    G --> H(["🎯 Projects & Continuous Learning"])
-
-    click B "./Supermart-Grocery-Sales-Dashboard" "Explore the Supermart project"
-    click C "./" "Explore repository learning resources"
-    click D "./BlinkIT-Grocery-Sales-Analysis" "Explore the BlinkIT project"
-    click F "./amazon-indian-business-dashboard-main" "Explore the Amazon business dashboard"
-
-    classDef start fill:#102747,color:#ffffff,stroke:#102747
-    classDef tools fill:#e5f0ff,color:#17365d,stroke:#4385d1
-    classDef outcome fill:#d9f5e5,color:#14532d,stroke:#2c9b68
-
-    class A,H start
-    class B,C,D,E,F tools
-    class G outcome
-```
-
-*The flowchart represents a suggested learning sequence, not a claim that every stage is already completed. Update it as your skills develop.*
-
-## 📂 Projects
-
-### 1. BlinkIT Grocery Sales Analysis
-
-- Explore grocery sales and business performance.
-- Identify trends and key metrics.
-- Interpret findings to support business decisions.
-
-[View Project](./BlinkIT-Grocery-Sales-Analysis)
-
-### 2. Supermart Grocery Sales Dashboard
-
-- Analyze sales trends and performance.
-- Present important metrics through visualizations.
-- Explore dashboard design and business reporting.
-
-[View Project](./Supermart-Grocery-Sales-Dashboard)
-
-### 3. Amazon India Business Dashboard
-
-- Analyze sales and profitability.
-- Investigate category concentration.
-- Examine returns, cancellations, and order outcomes.
-- Develop data-driven business recommendations.
-
-[View Project](./amazon-indian-business-dashboard-main)
-
-## 📈 Learning Journey
-
-My approach to data analytics is based on practical learning:
-
-1. **Explore:** Understand the dataset and identify business questions.
-2. **Clean:** Handle missing values, duplicates, and inconsistencies.
-3. **Analyze:** Calculate metrics and investigate patterns.
-4. **Visualize:** Communicate findings through charts and dashboards.
-5. **Interpret:** Evaluate results and their business implications.
-6. **Improve:** Validate calculations, document challenges, and refine the analysis.
-
-## 💡 Learning Reflections
-
-<details>
-<summary><strong>What I learned</strong></summary>
-
-Document new concepts, techniques, and analytical methods learned through projects.
-
-</details>
-
-<details>
-<summary><strong>Challenges I solved</strong></summary>
-
-Describe data quality issues, calculation errors, visualization challenges, and how they were addressed.
-
-</details>
-
-<details>
-<summary><strong>What I want to improve</strong></summary>
+## 🎯 What I want to improve next
 
 - Statistical reasoning and hypothesis testing
 - Python and SQL problem-solving
 - Dashboard design and data storytelling
 - Data validation and analytical accuracy
 
-</details>
-
-## 🗓️ Progress Log
-
-Record meaningful milestones as you learn.
-
-| Milestone | Notes |
-|---|---|
-| New concept | Add the topic and what you learned |
-| Project milestone | Document your contribution and findings |
-| Challenge solved | Explain the problem and solution |
-| Next learning goal | Record what you plan to practise next |
+---
 
 ## 🔗 Connect
 
+- **LinkedIn:** [pooja-singh-data](https://www.linkedin.com/in/pooja-singh-data/)
 - **GitHub:** [PoojaS-1616](https://github.com/PoojaS-1616)
-- **LinkedIn:** Add your LinkedIn profile URL here.
+- **Email:** poojas.s199977@gmail.com
 
 ---
 
