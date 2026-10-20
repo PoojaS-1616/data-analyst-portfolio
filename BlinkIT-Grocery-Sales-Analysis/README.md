@@ -8,9 +8,11 @@
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white)
 ![pandas](https://img.shields.io/badge/pandas-150458?logo=pandas&logoColor=white)
 ![SciPy](https://img.shields.io/badge/SciPy-8CAAE6?logo=scipy&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-SQLite-003B57?logo=sqlite&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-dashboard-FF4B4B?logo=streamlit&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Complete-0c831f)
 
-[**Interactive project page**](https://claude.ai/artifact/Fs1xTUy46a39cPXm8o2NEn) · [Notebook](notebooks/BlinkIT_Grocery_Sales_Analysis_v2.ipynb) · [Cleaned data](data/processed/BlinkIT_Grocery_Data_Cleaned.csv)
+[**Interactive project page**](https://claude.ai/artifact/Fs1xTUy46a39cPXm8o2NEn) · [Notebook](BlinkIT_Grocery_Sales_Analysis_v2.ipynb) · [Cleaned data](BlinkIT_Grocery_Data_Cleaned.csv) · [SQL warehouse](blinkit_warehouse.sql) · [Technical guide](Project_Explanation.md)
 
 </div>
 
@@ -23,6 +25,7 @@
 - [Approach](#approach)
 - [Results](#results)
 - [Recommendations](#recommendations)
+- [SQL warehouse and dashboard](#sql-warehouse-and-dashboard)
 - [Data cleaning decisions](#data-cleaning-decisions)
 - [Limitations](#limitations)
 - [Getting started](#getting-started)
@@ -54,7 +57,7 @@ Within a single SKU, Sales varies by only **$1.15** across outlets, against **$6
 
 | | |
 |---|---|
-| **Source file** | `BlinkIT_Grocery_Data.xlsx` |
+| **Source file** | `BlinkIT Grocery Data.xlsx` |
 | **Records** | 8,523 product–outlet combinations |
 | **Outlets / SKUs** | 10 / 1,559 |
 | **Categories** | 16 item types in 3 families (Food 71.86%, Non-Consumable 18.76%, Drinks 9.37%) |
@@ -151,6 +154,29 @@ Tier 2 looks best only because it has no Grocery Stores. Controlling for store f
 
 ---
 
+## SQL warehouse and dashboard
+
+The cleaned data is also loaded into a SQLite star schema, which powers an interactive Streamlit dashboard.
+
+![Streamlit dashboard](dashboard_live_screenshot.png)
+
+**Star schema** (`blinkit_warehouse.sql`, built by `build_warehouse.py`):
+
+| Table or view | Purpose |
+|---|---|
+| `dim_products` | One row per SKU: product family, category, fat content, weight |
+| `dim_outlets` | One row per outlet: type, location tier, size, establishment year, age |
+| `fact_inventory_pricing` | One row per product–outlet combination: price (MRP), visibility, rating |
+| `vw_sku_pricing_variance` | Price variance per SKU, showing the SKU explains 99.97% of Sales variance |
+| `vw_outlet_assortment_gap` | Assortment breadth gap: 541.5 SKUs per Grocery Store vs 930.0 per Supermarket |
+| `vw_format_controlled_tiers` | Tier comparison within the same store format, showing the Tier 2 effect is composition |
+| `vw_category_pareto` | Category concentration with running totals |
+| `vw_missing_sku_prioritization` | SKUs stocked in all 8 supermarkets but missing from the 2 Grocery Stores |
+
+**Dashboard tabs** (`app.py`): Assortment Expansion Simulator, Pricing Variance & MRP Proof, Simpson's Paradox (Tier 2 Audit), SKU Recommendation Engine, and SQL Star Schema Explorer.
+
+---
+
 ## Data cleaning decisions
 
 <details>
@@ -203,15 +229,28 @@ Sales and weight have none. The 144 visibility outliers reflect deliberate merch
 ## Getting started
 
 ```bash
-git clone https://github.com/<your-username>/BlinkIT-Grocery-Sales-Analysis.git
-cd BlinkIT-Grocery-Sales-Analysis
-python -m pip install pandas numpy matplotlib seaborn scipy openpyxl notebook
-jupyter notebook notebooks/BlinkIT_Grocery_Sales_Analysis_v2.ipynb
+git clone https://github.com/PoojaS-1616/data-analyst-portfolio.git
+cd data-analyst-portfolio/BlinkIT-Grocery-Sales-Analysis
+python -m pip install -r requirements.txt
 ```
 
-1. Put `BlinkIT_Grocery_Data.xlsx` in `data/raw/`. The notebook also looks in its own folder and `../data/raw/`.
-2. Run all cells.
-3. The notebook writes the cleaned CSV to `data/processed/` and 12 figures to `visuals/`.
+**Option 1: notebook.** Open `BlinkIT_Grocery_Sales_Analysis_v2.ipynb` in Jupyter and run all cells. It reads the Excel file from its own folder and writes the cleaned CSV and figures.
+
+```bash
+jupyter notebook BlinkIT_Grocery_Sales_Analysis_v2.ipynb
+```
+
+**Option 2: script.** Run the whole analysis from the command line. It writes `BlinkIT_Grocery_Data_Cleaned.csv` and the figures in `visuals/`.
+
+```bash
+python run_analysis.py
+```
+
+**Option 3: dashboard.** Start the Streamlit app. If `blinkit_warehouse.db` is missing, the app builds it from the cleaned CSV on first run.
+
+```bash
+streamlit run app.py
+```
 
 ---
 
@@ -219,20 +258,21 @@ jupyter notebook notebooks/BlinkIT_Grocery_Sales_Analysis_v2.ipynb
 
 ```
 BlinkIT-Grocery-Sales-Analysis/
-├── data/
-│   ├── raw/                 # BlinkIT_Grocery_Data.xlsx
-│   └── processed/           # BlinkIT_Grocery_Data_Cleaned.csv
-├── notebooks/
-│   └── BlinkIT_Grocery_Sales_Analysis_v2.ipynb
-├── visuals/                 # 01_product_assortment.png ... 10_pareto_categories.png
-├── reports/                 # Data_Cleaning_Process.md
+├── BlinkIT Grocery Data.xlsx                 # raw data
+├── BlinkIT_Grocery_Data_Cleaned.csv          # cleaned data (8,523 rows x 15 columns)
+├── BlinkIT_Grocery_Sales_Analysis_v2.ipynb   # full analysis notebook
+├── run_analysis.py                           # same analysis as a script
+├── blinkit_warehouse.sql                     # star schema and analytical views
+├── build_warehouse.py                        # builds the SQLite database
+├── app.py                                    # Streamlit dashboard
+├── Project_Explanation.md                    # technical guide
+├── requirements.txt
+├── dashboard_live_screenshot.png
+├── dashboard_preview.png
+├── visuals/                                  # figures from the analysis
 └── README.md
 ```
 
 ---
 
-<div align="center">
-
-**Author:** Pooja Singh · Built with Python, pandas, NumPy, Matplotlib, Seaborn and SciPy
-
-</div>
+**Author:** Pooja Singh · Built with Python, pandas, NumPy, Matplotlib, Seaborn, SciPy, SQL (SQLite), Plotly and Streamlit
