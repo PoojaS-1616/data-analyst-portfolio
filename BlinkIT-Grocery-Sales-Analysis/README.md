@@ -265,7 +265,6 @@ BlinkIT-Grocery-Sales-Analysis/
 ├── blinkit_warehouse.sql                     # star schema and analytical views
 ├── build_warehouse.py                        # builds the SQLite database
 ├── app.py                                    # Streamlit dashboard
-├── Project_Explanation.md                    # technical guide
 ├── requirements.txt
 ├── dashboard_live_screenshot.png
 ├── dashboard_preview.png
