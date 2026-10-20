@@ -12,7 +12,7 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-dashboard-FF4B4B?logo=streamlit&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Complete-0c831f)
 
-[**Interactive project page**](https://claude.ai/artifact/Fs1xTUy46a39cPXm8o2NEn) · [Notebook](BlinkIT_Grocery_Sales_Analysis_v2.ipynb) · [Cleaned data](BlinkIT_Grocery_Data_Cleaned.csv) · [SQL warehouse](blinkit_warehouse.sql) · [Technical guide](Project_Explanation.md)
+[**Interactive project page**](https://claude.ai/artifact/Fs1xTUy46a39cPXm8o2NEn) · [Notebook](BlinkIT_Grocery_Sales_Analysis_v2.ipynb) · [Cleaned data](BlinkIT_Grocery_Data_Cleaned.csv) · [SQL warehouse](blinkit_warehouse.sql) 
 
 </div>
 
