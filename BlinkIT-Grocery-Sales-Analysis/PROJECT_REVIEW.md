@@ -1,8 +1,8 @@
-# Project Review — Sapphire IQ BlinkIT Grocery Sales Analysis
+# Project Review — BlinkIT Grocery Sales Analysis
 
 ## Review basis
 
-The supplied `Sapphire IQ Blinkit Grocery Sales Analysis.pdf` defines four objectives and 16 tasks. The V2 notebook and supporting project assets were reviewed against those stated requirements.
+The supplied `Blinkit Grocery Sales Analysis.pdf` defines four objectives and 16 tasks. The V2 notebook and supporting project assets were reviewed against those stated requirements.
 
 ## Task coverage
 
