@@ -8,21 +8,23 @@ An Excel dashboard that turns 10,000 Amazon India orders into a single dashboard
 
 ## What it answers
 
-**1. How is the business doing overall?**
+**1. What is the overall recorded performance?**
 
-Total sales, profit, orders, units sold, average order value and profit margin, plus a monthly sales and profit trend from January 2024 to August 2026.
+Total recorded sales value, recorded profit, order count, total ordered quantity, average order value and recorded profit margin, plus monthly sales-value and profit trends from January 2024 to August 2026.
 
-**2. Which categories and products drive the business?**
+**2. Which categories and products contribute the most?**
 
-Sales, profit and units by category, and the top 10 products by sales.
+Recorded sales value, profit and ordered quantity by category, plus the top 10 products by recorded sales value.
 
-**3. How many orders are completed, and how many are lost?**
+**3. What are the order outcomes?**
 
-Delivered, shipped, returned and cancelled orders, with return and cancellation rates and a category-wise breakdown.
+Counts of delivered, shipped, returned and cancelled orders, with returned and cancelled shares calculated against all recorded orders, plus a category-wise breakdown.
 
-**4. Where does the business come from?**
+**4. Where does the recorded business value come from?**
 
-Sales and profit by payment method and fulfilment method, and sales, profit and orders by state.
+Recorded sales value and profit by payment method and fulfilment method, plus recorded sales value, profit and order counts by state.
+
+**Metric definitions:** Sales value and ordered quantity include all order statuses. They should not be interpreted as delivered sales or delivered units. Shipped orders are still in progress. Profit uses the values supplied in the dataset.
 
 ## What the data shows
 
@@ -42,12 +44,15 @@ Sales and profit by payment method and fulfilment method, and sales, profit and 
 
 - **Geography:** Maharashtra, Karnataka and Delhi together contribute approximately **49% of recorded sales value**.
   
-## Recommendations 
+## Recommendations
 
-1. **Reduce reliance on Electronics.** With 79% of sales in one category, any problem there hits the whole business. Test growth in Home & Kitchen (about 11.5% of sales) and Apparel & Fashion (about 6.3%).
-2. **Treat returns and cancellations as a business-wide problem.** Rates are similar in every category, so category-specific fixes will not solve it. Start with Electronics, where each lost order costs the most. The dataset has no return or cancellation reason, so the first step is to start capturing one.
-3. **Investigate the higher-loss segments.** Seller Flex (11.2%) and Merchant-fulfilled (10.9%) orders are lost more often than FBA (9.3%). Card payments (11.0%) are lost more often than Amazon Pay Later (7.6%). Some states, such as Rajasthan (11.4%), are higher than Kerala (7.9%). These gaps are small and some groups have few orders, so treat them as hypotheses to test, not conclusions.
-4. **Look for new growth.** With sales nearly flat between 2024 and 2025, the business needs a plan beyond the current mix.
+1. **Review category concentration.** Electronics & Mobiles contributes approximately 79% of recorded sales value. Evaluate opportunities in Home & Kitchen and Apparel & Fashion through small, measurable pilots. Compare delivered order value, order counts and recorded margins before recommending wider expansion.
+
+2. **Investigate returns and cancellations separately.** Capture reasons for each status, such as delivery problems, product issues or customer cancellation. Similar rates across categories justify checking shared processes, but do not establish a common cause. Prioritise Electronics for investigation because it has the largest recorded sales value associated with these statuses.
+
+3. **Validate differences between business segments.** Compare return and cancellation rates across fulfilment methods, payment methods and states alongside their order counts. Check whether differences persist after considering category mix, order value and time period. Treat the observed gaps as hypotheses for investigation.
+
+4. **Investigate the drivers of slow growth.** Recorded sales value increased by only 0.73% between 2024 and 2025. Break this change into order volume, average order value and category mix to identify which factors contributed. Compare equivalent periods when analysing the partial 2026 data.
 
 ## How it's built
 
