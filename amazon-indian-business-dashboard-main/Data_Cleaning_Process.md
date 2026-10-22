@@ -37,7 +37,20 @@ The following columns were checked for numeric values, blanks and unexpected neg
 - `Total_Sales_INR`
 - `Profit_INR`
 
-The original cleaning notes do not record the discount scale or exact minimum and maximum. A verified discount range is therefore not claimed here.
+### Discount Validation
+
+`Discount_Pct` stores discounts as decimal fractions. For example, `0.10` represents a 10% discount.
+
+The current workbook was checked across all 10,000 records:
+
+| Check | Verified result |
+|---|---|
+| Minimum discount | `0.00` — 0% |
+| Maximum discount | `0.25` — 25% |
+| Missing discount values | 0 |
+| Negative discount values | 0 |
+
+These are the observed bounds in the provided dataset.
 
 ### Text Consistency
 
@@ -137,6 +150,5 @@ The following details were not recorded in the original cleaning notes:
 
 - The exact date-conversion method used.
 - Post-conversion formula results.
-- The discount scale and observed minimum and maximum.
 
 These details should be confirmed to complete the cleaning audit trail.
