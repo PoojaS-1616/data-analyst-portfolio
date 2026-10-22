@@ -1,269 +1,142 @@
-<h1>Data Cleaning Process</h1>
+# Data Cleaning Process
 
-<p><strong>Project: Amazon India Business Performance Dashboard</strong></p>
+**Project: Amazon India Business Performance Dashboard**
 
-<h2>Overview</h2>
+## Overview
 
-<p>
-  Before building the dashboard, I reviewed the dataset for missing values,
-  duplicate records, data types and inconsistent labels. The dataset contains
-  <strong>10,000 order records</strong> covering products, sales, profit,
-  payment methods, fulfilment, order status and shipping states.
-</p>
+Before building the dashboard, I checked the dataset for missing values, duplicate records, incorrect data types and inconsistent labels.
 
-<p>
-  The main source-data issue identified was that <code>Order_Date</code>
-  values were stored as text. These were converted into Excel dates.
-  No records were removed.
-</p>
+The dataset contains **10,000 order records** covering products, sales, profit, payment methods, fulfilment, order status and shipping states.
 
-<h2>Original Columns</h2>
+The main issue identified was that `Order_Date` values were stored as text. These were converted into Excel dates. **No records were removed.**
 
-<p>
-  <code>Order_ID</code>,
-  <code>Order_Date</code>,
-  <code>Category</code>,
-  <code>Product</code>,
-  <code>Quantity</code>,
-  <code>Unit_Price_INR</code>,
-  <code>Discount_Pct</code>,
-  <code>Total_Sales_INR</code>,
-  <code>Profit_INR</code>,
-  <code>Payment_Method</code>,
-  <code>Fulfillment</code>,
-  <code>Order_Status</code>,
-  <code>Ship_State</code>
-</p>
+## Original Columns
 
-<p>
-  <code>Order_Month</code> was added during data preparation;
-  it is not an original source column.
-</p>
+`Order_ID`, `Order_Date`, `Category`, `Product`, `Quantity`, `Unit_Price_INR`, `Discount_Pct`, `Total_Sales_INR`, `Profit_INR`, `Payment_Method`, `Fulfillment`, `Order_Status`, `Ship_State`
 
-<h2>Validation Checks</h2>
+The `Order_Month` helper column was added during data preparation.
 
-<table>
-  <thead>
-    <tr>
-      <th>Check</th>
-      <th>Finding</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Missing values</td>
-      <td>No missing values identified in the checked columns</td>
-      <td>No rows removed or values imputed</td>
-    </tr>
-    <tr>
-      <td>Duplicate records</td>
-      <td>No repeated rows identified</td>
-      <td>No duplicates removed</td>
-    </tr>
-    <tr>
-      <td>Duplicate Order IDs</td>
-      <td>No repeated <code>Order_ID</code> values identified</td>
-      <td>All order records retained</td>
-    </tr>
-    <tr>
-      <td>Numeric fields</td>
-      <td>
-        No blanks, text entries or unexpected negative values identified
-        in Quantity, Unit Price, Discount, Sales or Profit
-      </td>
-      <td>Existing values retained</td>
-    </tr>
-    <tr>
-      <td>Text labels</td>
-      <td>
-        Category, Product, Payment Method, Fulfilment, Order Status
-        and State labels were consistent in the checks performed
-      </td>
-      <td>No label corrections required</td>
-    </tr>
-    <tr>
-      <td>Date values</td>
-      <td><code>Order_Date</code> was stored as text</td>
-      <td>Converted to Excel dates</td>
-    </tr>
-  </tbody>
-</table>
+## Validation Checks
 
-<h3>Discount Validation</h3>
+| Check | Finding | Action |
+|---|---|---|
+| Missing values | No missing values identified in the checked columns | No rows removed or values imputed |
+| Duplicate records | No repeated rows identified | No duplicates removed |
+| Duplicate Order IDs | No repeated `Order_ID` values identified | All order records retained |
+| Numeric fields | No blanks, text entries or unexpected negative values identified | Existing values retained |
+| Text labels | Labels were consistent in the checks performed | No label corrections required |
+| Date values | `Order_Date` was stored as text | Converted to Excel dates |
 
-<p>
-  <code>Discount_Pct</code> was checked as a numeric field.
-  The original cleaning notes do not record the exact minimum, maximum
-  or percentage scale used, so this document does not claim a verified
-  discount range.
-</p>
+### Numeric Fields
 
-<p>
-  To reproduce this check, confirm whether discounts are stored as fractions,
-  such as <code>0.10</code> for 10%, or percentage points,
-  such as <code>10</code> for 10%. Record the observed minimum and maximum
-  and validate them against the confirmed definition.
-</p>
+The following columns were checked for numeric values, blanks and unexpected negative values:
 
-<h3>Text Consistency</h3>
+- `Quantity`
+- `Unit_Price_INR`
+- `Discount_Pct`
+- `Total_Sales_INR`
+- `Profit_INR`
 
-<p>
-  Labels were checked for inconsistent spelling and unwanted spaces.
-  For example, <code>"UPI"</code> and <code>"UPI "</code> can be treated
-  as different labels because the second value contains a trailing space.
-</p>
+The original cleaning notes do not record the discount scale or exact minimum and maximum. A verified discount range is therefore not claimed here.
 
-<p><strong>Category labels:</strong></p>
+### Text Consistency
 
-<ul>
-  <li>Electronics &amp; Mobiles</li>
-  <li>Home &amp; Kitchen</li>
-  <li>Apparel &amp; Fashion</li>
-  <li>Beauty &amp; Personal Care</li>
-  <li>Pantry &amp; Groceries</li>
-</ul>
+Text fields were checked for inconsistent spelling and unwanted spaces.
 
-<p><strong>Order statuses:</strong></p>
+For example, `"UPI"` and `"UPI "` can be treated as different labels because the second value contains a trailing space.
 
-<ul>
-  <li>Delivered</li>
-  <li>Shipped</li>
-  <li>Returned</li>
-  <li>Cancelled</li>
-</ul>
+**Category labels:**
 
-<h2>Date Correction</h2>
+- Electronics & Mobiles
+- Home & Kitchen
+- Apparel & Fashion
+- Beauty & Personal Care
+- Pantry & Groceries
 
-<p>
-  The <code>Order_Date</code> column contained text rather than Excel
-  date values. The initial check:
-</p>
+**Order statuses:**
 
-<pre><code>=ISNUMBER(B2)</code></pre>
+- Delivered
+- Shipped
+- Returned
+- Cancelled
 
-<p>returned <code>FALSE</code> for the affected dates.</p>
+## Date Correction
 
-<p>
-  The text values were converted into Excel dates and displayed using
-  a consistent date format. Changing the display format alone would
-  not have converted the underlying text values.
-</p>
+The `Order_Date` column contained text rather than Excel date values.
 
-<h3>Reproducing and Validating the Conversion</h3>
+The initial check:
 
-<p>
-  The original notes do not identify the conversion method used.
-  A repeatable Excel procedure is:
-</p>
+```excel
+=ISNUMBER(B2)
+```
 
-<ol>
-  <li>
-    Confirm the source date order, such as day-month-year or
-    month-day-year, before converting any values.
-  </li>
-  <li>
-    Select <code>Order_Date</code>, then choose
-    <strong>Data &gt; Text to Columns</strong>.
-  </li>
-  <li>
-    Select <strong>Delimited</strong>, proceed without selecting
-    a delimiter that splits the date, and choose <strong>Date</strong>
-    in the final step.
-  </li>
-  <li>
-    Select the date order that matches the source and finish the conversion.
-  </li>
-  <li>
-    Apply a consistent display format, such as <code>dd-mmm-yyyy</code>.
-  </li>
-  <li>
-    Repeat <code>=ISNUMBER(B2)</code> for the populated date cells.
-    The expected result is <code>TRUE</code> after successful conversion.
-  </li>
-  <li>
-    Compare sample converted dates with the originals to confirm
-    that the day and month have not been swapped.
-  </li>
-</ol>
+returned `FALSE` for the affected dates.
 
-<p>
-  These steps provide a reproducible procedure; the original notes
-  do not retain the post-conversion formula results.
-</p>
+The text values were converted into Excel dates and displayed using a consistent date format. Changing the display format alone would not have converted the underlying text.
 
-<h2>Order_Month Helper Column</h2>
+### Reproducing the Conversion
 
-<p>
-  After correcting <code>Order_Date</code>, an <code>Order_Month</code>
-  helper column was derived in <code>YYYY-MM</code> format to support
-  monthly summaries.
-</p>
+The original notes do not identify the conversion method used. The following procedure provides a way to reproduce and validate the correction:
 
-<p>For a cleaned date in <code>B2</code>, this can be reproduced with:</p>
+1. Confirm whether the source dates use day-month-year or month-day-year.
+2. Select the `Order_Date` column.
+3. Choose **Data > Text to Columns**.
+4. Select **Delimited** and proceed without selecting a delimiter that splits the date.
+5. In the final step, select **Date** and choose the order matching the source.
+6. Finish the conversion and apply a consistent display format, such as `dd-mmm-yyyy`.
+7. Repeat `=ISNUMBER(B2)` across the populated date cells. The expected result is `TRUE`.
+8. Compare sample converted dates with the original values to check that days and months have not been swapped.
 
-<pre><code>=TEXT(B2,"yyyy-mm")</code></pre>
+The original notes do not retain the post-conversion formula results.
 
-<p>
-  The formula returns a month label such as <code>2024-04</code>.
-  <code>Order_Date</code> remains the underlying Excel date, while
-  <code>Order_Month</code> provides a consistent grouping label
-  for the dashboard's monthly calculations.
-</p>
+## Order_Month Helper Column
 
-<h2>Returned and Cancelled Orders</h2>
+After correcting `Order_Date`, an `Order_Month` helper column was derived in `YYYY-MM` format for monthly summaries.
 
-<p>
-  Returned and cancelled orders were retained because they are valid
-  order statuses, rather than data-cleaning errors.
-</p>
+For a cleaned date in `B2`, the month label can be generated with:
 
-<p>Keeping these records supports calculation of:</p>
+```excel
+=TEXT(B2,"yyyy-mm")
+```
 
-<ul>
-  <li>Return and cancellation rates.</li>
-  <li>Category and segment comparisons.</li>
-  <li>Recorded sales value associated with returned and cancelled orders.</li>
-</ul>
+For example, an April 2024 date produces `2024-04`.
 
-<p>
-  In this dataset, returned and cancelled orders retain a sales value
-  while their recorded profit is zero. Their associated sales value
-  should not be interpreted as confirmed financial loss.
-  Dashboard sales totals include these records unless an exclusion
-  is explicitly applied.
-</p>
+`Order_Date` remains the underlying Excel date. `Order_Month` provides a consistent grouping label for the dashboard's monthly calculations.
 
-<h2>Final Review and Outcome</h2>
+## Returned and Cancelled Orders
 
-<p>
-  The final review covered missing values, duplicates, numeric fields,
-  dates and text labels.
-</p>
+Returned and cancelled orders were retained because they are valid order statuses, rather than data-cleaning errors.
 
-<ul>
-  <li><strong>Records before preparation:</strong> 10,000.</li>
-  <li><strong>Records after preparation:</strong> 10,000.</li>
-  <li><strong>Records removed:</strong> 0.</li>
-  <li>
-    <strong>Source-data correction:</strong>
-    Text dates converted into Excel dates.
-  </li>
-  <li>
-    <strong>Derived field added:</strong>
-    <code>Order_Month</code> for monthly summaries.
-  </li>
-</ul>
+Keeping these records supports:
 
-<p>
-  No missing values, duplicate records or duplicate Order IDs were
-  identified in the checks performed. The prepared dataset was used
-  for the dashboard's KPIs, charts and segment analyses.
-</p>
+- Return and cancellation rate calculations.
+- Comparisons across categories and business segments.
+- Analysis of the recorded sales value associated with these statuses.
 
-<p>
-  <strong>Documentation limitations:</strong>
-  The exact original date-conversion method, post-conversion formula
-  results and discount bounds remain undocumented. These details
-  should be confirmed to complete the cleaning audit trail.
-</p>
+In this dataset, returned and cancelled orders retain a sales value while their recorded profit is zero.
+
+Their associated sales value should **not be interpreted as confirmed financial loss**. Dashboard sales totals include these records unless an exclusion is explicitly applied.
+
+## Final Outcome
+
+| Measure | Result |
+|---|---|
+| Records before preparation | 10,000 |
+| Records after preparation | 10,000 |
+| Records removed | 0 |
+| Source-data correction | Text dates converted into Excel dates |
+| Derived field added | `Order_Month` |
+
+No missing values, duplicate records or duplicate Order IDs were identified in the checks performed.
+
+The prepared dataset was used for the dashboard's KPIs, monthly trends, category comparisons, product analysis, order outcomes and payment, fulfilment and state summaries.
+
+## Documentation Limitations
+
+The following details were not recorded in the original cleaning notes:
+
+- The exact date-conversion method used.
+- Post-conversion formula results.
+- The discount scale and observed minimum and maximum.
+
+These details should be confirmed to complete the cleaning audit trail.
