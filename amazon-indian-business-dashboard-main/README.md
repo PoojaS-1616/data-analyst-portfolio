@@ -26,14 +26,22 @@ Sales and profit by payment method and fulfilment method, and sales, profit and 
 
 ## What the data shows
 
-* **Scale and margin:** The business booked about **₹15.58 crore** in sales and **₹3.32 crore** in profit, a margin of roughly **21%**. Excluding returned and cancelled orders, the margin is about 23.7%.
-* **One category carries the business:** Electronics & Mobiles brings in about **79%** of all sales. The other four categories share the remaining 21%.
-* **Lost orders:** 9.85% of orders are lost, with a 4.9% return rate and a 5.0% cancellation rate. Together these carry about ₹1.56 crore of booked sales, around 10% of the total.
-* **The losses are spread evenly:** return and cancellation rates sit between about 8.8% and 10.6% in every category. Electronics accounts for most of the rupee loss (about ₹1.24 crore of ₹1.56 crore) because it has the highest sales.
-* **Sales are flat year on year:** about ₹5.70 crore in 2024 and ₹5.74 crore in 2025, a rise of under 1%.
-* **Payments and fulfilment:** UPI is the most used payment method at about 50% of sales. Amazon-fulfilled (FBA) orders account for about 69% of sales.
-* **Geography:** Maharashtra, Karnataka and Delhi together contribute about 49% of sales.(2026 covers January to August only, so it is not compared.)
+- **Recorded sales and profit:** The dataset records approximately **₹15.58 crore in sales value** and **₹3.32 crore in profit**, giving a recorded profit margin of **21.29%**. Sales value includes returned and cancelled orders. Excluding those statuses, the recorded margin is **23.67%**.
 
+- **Category concentration:** Electronics & Mobiles contributes approximately **79% of recorded sales value** from **30% of orders**, showing substantial dependence on one category.
+
+- **Returned and cancelled orders:** There are **485 returned orders** and **500 cancelled orders**, representing **4.85%** and **5.00%** of all recorded orders. Their combined share is **9.85%**.
+
+- **Associated sales value:** Returned and cancelled orders carry approximately **₹1.56 crore in recorded sales value**. This is the value associated with these statuses, not confirmed financial loss.
+
+- **Category differences:** The combined returned and cancelled share ranges from approximately **8.8% to 10.6%** across categories. Electronics has the largest associated sales value because of its high contribution to overall sales.
+
+- **Annual performance:** Recorded sales value increased from approximately **₹5.70 crore in 2024** to **₹5.74 crore in 2025**, a rise of **0.73%**. The 2026 data covers January to August and is excluded from this full-year comparison.
+
+- **Payments and fulfilment:** UPI accounts for approximately **50% of recorded sales value**, while Amazon-fulfilled (FBA) orders account for approximately **69%**.
+
+- **Geography:** Maharashtra, Karnataka and Delhi together contribute approximately **49% of recorded sales value**.
+  
 ## Recommendations 
 
 1. **Reduce reliance on Electronics.** With 79% of sales in one category, any problem there hits the whole business. Test growth in Home & Kitchen (about 11.5% of sales) and Apparel & Fashion (about 6.3%).
