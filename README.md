@@ -1,108 +1,88 @@
 # Pooja Singh | Data Analytics Portfolio
 
-I use Excel, Python and SQL to turn data into clear business findings, interactive dashboards and practical recommendations.
+A collection of business analytics projects using Excel, Python and SQL to investigate business questions, build dashboards and communicate actionable findings.
 
-This portfolio brings together retail analytics projects covering business performance, product pricing, outlet assortment and data quality.
+The projects cover retail performance, profitability, product pricing and outlet assortment, with an emphasis on data validation and clear interpretation.
 
 [LinkedIn](https://www.linkedin.com/in/pooja-singh-data/) · [Email](mailto:poojas.s199977@gmail.com) · [GitHub](https://github.com/PoojaS-1616)
 
----
+## Projects
 
-## Featured Projects
+| Project | Analytical focus | Tools |
+|---|---|---|
+| [Amazon India Business Performance](./amazon-indian-business-dashboard-main/) | Sales, profitability, category concentration and order outcomes | Excel |
+| [Supermart Grocery Sales](./Supermart-Grocery-Sales-Dashboard/) | Sales growth, regional performance, discounts and margins | Excel |
+| [BlinkIT Grocery Pricing & Catalogue](./BlinkIT-Grocery-Sales-Analysis/) | Data validation, pricing patterns and outlet assortment | Python, SQL, Streamlit |
 
-| Project | Tools | Key finding | Explore |
-|---|---|---|---|
-| **Amazon India Business Performance** | Excel | Electronics contributes approximately **79% of sales**; returned and cancelled orders account for **9.85% of orders**. | [View project](./amazon-indian-business-dashboard-main/) |
-| **Supermart Grocery Sales** | Excel | Sales increased **28.6% in 2018**; the analysis found no clear correlation between discount level and profit. | [View project](./Supermart-Grocery-Sales-Dashboard/) |
-| **BlinkIT Grocery Pricing & Catalogue** | Python, pandas, SciPy, SQL, Streamlit | Item identity explains approximately **99.97% of the variance** in `Sales`, suggesting a SKU-linked price or value field. | [View project](./BlinkIT-Grocery-Sales-Analysis/) |
+### Amazon India Business Performance Dashboard
 
-### 1. Amazon India Business Performance Dashboard
+Analysed **10,000 orders** and built an Excel dashboard answering four business questions about overall performance, business drivers, order outcomes and geographic contribution.
 
-**Business question:** How is the business performing, what drives results, and where are orders being lost?
+- Developed 6 KPIs and 9 charts covering sales, profit, products and order statuses.
+- Identified that Electronics contributes approximately **79% of sales** from **30% of orders**.
+- Found that returned and cancelled orders represent **9.85% of orders**.
+- Presented recommendations for reviewing category dependence and investigating order losses.
 
-- Analysed **10,000 orders** using a formula-driven Excel dashboard.
-- Summarised performance through **6 KPIs, 9 charts and 4 business questions**.
-- Compared categories, products, order statuses, states, payment methods and fulfilment methods.
-- Highlighted category concentration and the share of returned and cancelled orders.
-- Developed recommendations for diversification and further investigation of order losses.
+**Deliverables:** Excel dashboard, dashboard preview and data-cleaning documentation.
 
-[Explore the Amazon India project →](./amazon-indian-business-dashboard-main/)
+[View project →](./amazon-indian-business-dashboard-main/)
 
-### 2. Supermart Grocery Sales Dashboard
+### Supermart Grocery Sales Dashboard
 
-**Business question:** Which periods, regions and product categories contribute to sales and profitability?
+Analysed **9,994 orders** to compare sales growth, category performance and profitability.
 
-- Analysed **9,994 orders** in an interactive Excel dashboard.
-- Built Year, Region and Category dropdown filters that update KPIs and charts.
-- Examined annual growth, monthly patterns and category performance.
-- Investigated the relationship between discounts and profit.
+- Built Year, Region and Category dropdown filters that update dashboard KPIs and charts.
+- Observed **28.6% sales growth in 2018** and examined monthly sales patterns.
+- Investigated the relationship between discounts and profit, finding no clear correlation in the analysis.
 - Identified sub-categories with high sales and below-average margins.
 
-[Explore the Supermart project →](./Supermart-Grocery-Sales-Dashboard/)
+**Deliverables:** Interactive Excel dashboard, dashboard preview and data-cleaning documentation.
 
-### 3. BlinkIT Grocery Pricing & Catalogue Analysis
+[View project →](./Supermart-Grocery-Sales-Dashboard/)
 
-**Business question:** What can product and outlet records reliably tell us about pricing, assortment and ratings?
+### BlinkIT Grocery Pricing & Catalogue Analysis
 
-- Analysed **8,523 product–outlet records across 10 outlets**.
-- Documented data cleaning, missing-value handling and analytical limitations.
+Analysed **8,523 product–outlet records across 10 outlets** using Python, SQL and Streamlit.
+
+- Documented data cleaning, missing-value handling and exploratory analysis.
 - Used variance decomposition to investigate the meaning of the `Sales` field.
-- Built a **SQL star-schema warehouse** for reusable analysis.
-- Created a **Streamlit dashboard** to explore product and outlet patterns.
+- Found that item identity explains approximately **99.97% of its variance**, suggesting a SKU-linked price or value.
+- Built a SQL star-schema warehouse and an interactive Streamlit dashboard.
 
-**Key analytical judgement:** The `Sales` field appears strongly linked to item identity. Its meaning needs source validation before it can be treated as transaction revenue; it does not establish units sold or demand.
+**Interpretation:** The meaning of `Sales` requires source validation before treating it as transaction revenue. The available records alone do not establish units sold or demand over time.
 
-[Explore the BlinkIT project →](./BlinkIT-Grocery-Sales-Analysis/)
+**Deliverables:** Analysis notebook, cleaned dataset, SQL scripts, visualisations and Streamlit application.
 
-#### Dashboard Preview
+[View project →](./BlinkIT-Grocery-Sales-Analysis/) · [View SQL script →](./BlinkIT-Grocery-Sales-Analysis/blinkit_warehouse.sql)
 
-![BlinkIT Grocery Analysis Dashboard](./BlinkIT-Grocery-Sales-Analysis/dashboard_live_screenshot.png)
+## Technical Skills Demonstrated
 
----
+| Area | Application |
+|---|---|
+| Excel | Data cleaning, SUMIFS, COUNTIFS, helper sheets, dropdown filters and dashboards |
+| Python | Data preparation, transformation and exploratory analysis with pandas and NumPy |
+| SQL | Star-schema design, joins, aggregations and views |
+| Statistics | Correlation analysis, variance decomposition and hypothesis testing |
+| Visualisation | Excel charts, Matplotlib, Seaborn, Plotly and Streamlit |
+| Business analysis | KPI interpretation, segment comparisons, recommendations and analytical limitations |
 
-## My Analytical Workflow
+## Analytical Approach
 
-1. **Define the question:** Identify the business decision and relevant metrics.
-2. **Validate and clean:** Check data types, missing values, duplicates and field definitions.
-3. **Analyse:** Compare segments, investigate patterns and test assumptions.
-4. **Visualise:** Present findings through clear charts and interactive dashboards.
-5. **Recommend:** Explain the implications, limitations and next steps.
+1. Define the business question and relevant metrics.
+2. Validate field definitions and assess data quality.
+3. Clean and transform the data.
+4. Investigate patterns and test assumptions.
+5. Communicate findings through charts and dashboards.
+6. Recommend next steps while documenting limitations.
 
----
+Detailed methods, findings and supporting files are available in each project folder.
 
-## Skills Demonstrated
+## Current Development
 
-| Skill | Application | Projects |
-|---|---|---|
-| **Excel** | Data cleaning, SUMIFS, COUNTIFS, helper sheets, dropdown filters and dashboards | Amazon India, Supermart |
-| **Python** | Cleaning, imputation, transformation and exploratory analysis using pandas and NumPy | BlinkIT |
-| **Statistics** | Correlation analysis, variance decomposition and Kruskal–Wallis testing | BlinkIT, Supermart |
-| **SQL** | Star-schema design, joins, aggregations and views | BlinkIT |
-| **Data visualisation** | Excel charts, Matplotlib, Seaborn, Plotly and Streamlit | Across the portfolio |
-| **Business analysis** | KPI definition, segment comparisons, recommendations and interpretation of limitations | All three |
+I am strengthening my statistical inference, regression, advanced SQL and Python problem-solving skills, alongside dashboard design and business communication.
 
-[View the BlinkIT SQL warehouse script →](./BlinkIT-Grocery-Sales-Analysis/blinkit_warehouse.sql)
-
----
-
-## Current Learning Focus
-
-I am strengthening my skills in:
-
-- **Statistical reasoning:** probability, sampling, confidence intervals and hypothesis testing.
-- **Regression:** assumptions, interpretation and validation.
-- **Python and SQL:** problem-solving and reusable analytical workflows.
-- **Data storytelling:** dashboard design and clear business recommendations.
-- **Analytical accuracy:** validating metric definitions and distinguishing association from causation.
-
----
-
-## Connect
+## Contact
 
 - **LinkedIn:** [pooja-singh-data](https://www.linkedin.com/in/pooja-singh-data/)
-- **GitHub:** [PoojaS-1616](https://github.com/PoojaS-1616)
 - **Email:** [poojas.s199977@gmail.com](mailto:poojas.s199977@gmail.com)
-
----
-
-*Each project documents the business question, analysis, findings and limitations. Explore the individual project folders for datasets, code and dashboards.*
+- **GitHub:** [PoojaS-1616](https://github.com/PoojaS-1616)
