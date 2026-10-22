@@ -1,277 +1,255 @@
-<div align="center">
-
-# 🛒 BlinkIT Grocery Pricing & Catalogue Analysis
-
-**What does the "Sales" column really measure? An exploratory analysis of 8,523 product–outlet records across 10 Blinkit outlets.**
-
-![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)
-![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white)
-![pandas](https://img.shields.io/badge/pandas-150458?logo=pandas&logoColor=white)
-![SciPy](https://img.shields.io/badge/SciPy-8CAAE6?logo=scipy&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-SQLite-003B57?logo=sqlite&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-dashboard-FF4B4B?logo=streamlit&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Complete-0c831f)
-
-[**Interactive project page**](https://claude.ai/artifact/Fs1xTUy46a39cPXm8o2NEn) · [Notebook](BlinkIT_Grocery_Sales_Analysis_v2.ipynb) · [Cleaned data](BlinkIT_Grocery_Data_Cleaned.csv) · [SQL warehouse](blinkit_warehouse.sql) 
-
-</div>
-
----
-
-## Contents
-
-- [The headline finding](#the-headline-finding)
-- [Dataset](#dataset)
-- [Approach](#approach)
-- [Results](#results)
-- [Recommendations](#recommendations)
-- [SQL warehouse and dashboard](#sql-warehouse-and-dashboard)
-- [Data cleaning decisions](#data-cleaning-decisions)
-- [Limitations](#limitations)
-- [Getting started](#getting-started)
-- [Repository structure](#repository-structure)
-
----
-
-## The headline finding
-
-A naive reading treats `Sales` as consumer turnover (units × price). A variance decomposition says otherwise:
-
-| Factor | Share of `Sales` variance explained |
-|---|---|
-| `Item Identifier` (SKU) | **99.97%** (R² = 0.9997) |
-| `Outlet Identifier` | **0.03%** |
-
-Within a single SKU, Sales varies by only **$1.15** across outlets, against **$62.28** across the whole dataset. So `Sales` behaves like **Item Retail Price (MRP)**, not transaction volume. That reframes every other result:
-
-1. Store-level price parity (~$140 per item) is mechanical: each store stocks a sample of the same price catalogue.
-2. The revenue gap between Supermarkets and Grocery Stores comes from **catalogue breadth** (930.0 vs 541.5 SKUs), not value per item.
-3. The category effect (Kruskal-Wallis H = 107.30, p = 5.31 × 10⁻¹⁶) is a **price-mix** effect, for example Household vs Baking Goods.
-4. The $109k "uplift" is **theoretical catalogue value**, not guaranteed demand.
-
-> **Currency note:** The raw data is unlabelled. Blinkit operates in India (₹), but values are shown with `$` to follow portfolio reporting conventions. The numbers are identical.
-
----
-
-## Dataset
-
-| | |
-|---|---|
-| **Source file** | `BlinkIT Grocery Data.xlsx` |
-| **Records** | 8,523 product–outlet combinations |
-| **Outlets / SKUs** | 10 / 1,559 |
-| **Categories** | 16 item types in 3 families (Food 71.86%, Non-Consumable 18.76%, Drinks 9.37%) |
-| **Cleaned output** | 8,523 rows × 15 columns |
-| **Limitation** | Aggregated snapshot, no timestamps |
-
----
-
-## Approach
-
-```mermaid
-flowchart LR
-    A[Raw Excel<br/>8,523 rows] --> B[Objective 1<br/>Understand the business]
-    B --> C[Objective 2<br/>Make the data reliable]
-    C --> D[Objective 3<br/>What drives sales?]
-    D --> E[Objective 4<br/>Actionable decisions]
-    C --> F[(Cleaned CSV)]
-    E --> G[8 recommendations]
-```
-
-| Objective | Tasks | Focus |
-|---|---|---|
-| **1. Understand the business** | 1.1 – 1.4 | Catalogue taxonomy, outlet topology, baseline sales metrics, ratings |
-| **2. Make the data reliable** | 2.1 – 2.4 | Imputation, duplicates, outliers, label harmonisation |
-| **3. What drives sales?** | 3.1 – 3.4 | Category and outlet drivers, correlations, Kruskal-Wallis, top vs bottom 25% cohorts |
-| **4. Actionable decisions** | 4.1 – 4.4 | Pareto concentration, fair outlet comparison, assortment gap model, recommendations |
-
----
-
-## Results
-
-### Baseline
-
-| Metric | Value |
-|---|---|
-| Total sales | $1,201,681.49 |
-| Mean / median | $140.99 / $143.01 |
-| Std. deviation | $62.28 |
-| Range | $31.29 – $266.89 |
-| Skewness | ≈ 0.13 (symmetric) |
-| Mean rating | 3.97 / 5, with **39.18%** of records at exactly 4.0 |
-
-### Catalogue concentration
-
-The top 5 categories generate **59.03%** ($709,370) of catalogue value, the top 8 generate 79.06%, and the top 10 generate 88.87%. Fruits & Vegetables (14.82%) and Snack Foods (14.60%) lead. Household ($149.44) and Dairy ($148.50) have the highest average unit price, and Baking Goods ($126.43) the lowest.
-
-![Pareto of categories](visuals/10_pareto_categories.png)
-
-### Outlet economics
-
-| Store format | Total | Per outlet |
-|---|---|---|
-| Supermarket Type 1 (6 outlets) | $787,549.89 | $131,258.32 |
-| Supermarket Type 2 (1 outlet) | $131,477.78 | $131,477.78 |
-| Supermarket Type 3 (1 outlet) | $130,714.67 | $130,714.67 |
-| Grocery Store (2 outlets) | $151,939.15 | **$75,969.57** (about 42% lower) |
-
-Grocery Stores list 43% fewer items than the best outlet, yet their average unit price is only about 2% lower. The gap is **breadth, not quality**.
-
-### The Tier 2 illusion
-
-| Tier | All outlets | Supermarkets only |
-|---|---|---|
-| Tier 1 | $112,132.60 | $131,295.11 |
-| Tier 2 | **$131,050.22** | $131,050.22 |
-| Tier 3 | $118,033.26 | $131,333.82 |
-
-Tier 2 looks best only because it has no Grocery Stores. Controlling for store format, all tiers perform the same. This is a composition effect.
-
-### Statistical tests
-
-| Test | Result |
-|---|---|
-| Outlet type vs Sales (Kruskal-Wallis) | H = 0.37, p = 0.947 |
-| Visibility vs Sales | r = −0.0060, p = 0.58 |
-| Rating vs Sales | r = +0.0113, p = 0.30 |
-| Outlet age vs Sales | r = +0.0007, p = 0.95 |
-| Item weight vs Sales | r = +0.0260, p = 0.017 (negligible) |
-
----
-
-## Recommendations
-
-| # | Recommendation | Evidence |
-|---|---|---|
-| 1 | **Expand Grocery Store assortment breadth** | 388.5 fewer SKUs per store at near-identical unit price; about +$109,009 theoretical (+9.07%) |
-| 2 | **Maintain depth in the top 5 categories** | 59.03% of catalogue value |
-| 3 | **Standardise by store format, not city tier** | Supermarkets perform the same in every tier |
-| 4 | **Read category price tiers as unit economics** | Baking Goods averages $126.43 per item (MRP) |
-| 5 | **Audit in-app visibility against unit volume** | Visibility vs Sales r = −0.0060 |
-| 6 | **Redesign the review system** | 39.18% of ratings are exactly 4.0 |
-| 7 | **Standardise master data** | Inconsistent fat labels; conflicting sizes at OUT010, OUT017, OUT045 |
-| 8 | **Spread high-MRP SKUs across more outlets** | Total SKU sales correlate 0.53 with outlet count |
-
----
-
-## SQL warehouse and dashboard
-
-The cleaned data is also loaded into a SQLite star schema, which powers an interactive Streamlit dashboard.
-
-![Streamlit dashboard](dashboard_live_screenshot.png)
-
-**Star schema** (`blinkit_warehouse.sql`, built by `build_warehouse.py`):
-
-| Table or view | Purpose |
-|---|---|
-| `dim_products` | One row per SKU: product family, category, fat content, weight |
-| `dim_outlets` | One row per outlet: type, location tier, size, establishment year, age |
-| `fact_inventory_pricing` | One row per product–outlet combination: price (MRP), visibility, rating |
-| `vw_sku_pricing_variance` | Price variance per SKU, showing the SKU explains 99.97% of Sales variance |
-| `vw_outlet_assortment_gap` | Assortment breadth gap: 541.5 SKUs per Grocery Store vs 930.0 per Supermarket |
-| `vw_format_controlled_tiers` | Tier comparison within the same store format, showing the Tier 2 effect is composition |
-| `vw_category_pareto` | Category concentration with running totals |
-| `vw_missing_sku_prioritization` | SKUs stocked in all 8 supermarkets but missing from the 2 Grocery Stores |
-
-**Dashboard tabs** (`app.py`): Assortment Expansion Simulator, Pricing Variance & MRP Proof, Simpson's Paradox (Tier 2 Audit), SKU Recommendation Engine, and SQL Star Schema Explorer.
-
----
-
-## Data cleaning decisions
-
-<details>
-<summary><b>Item Weight</b>: 1,463 missing rows (17.16%)</summary>
-
-Weight never varies within a SKU, so missing values are filled with the **SKU mean from other outlets**. The 4 SKUs never weighed anywhere take the category median.
-</details>
-
-<details>
-<summary><b>Item Visibility</b>: 526 zero values</summary>
-
-Imputed with SKU means. Grocery Stores have higher true visibility (0.111) than Supermarkets (0.065), so this slightly pulls Grocery Store values down. The bias is documented.
-</details>
-
-<details>
-<summary><b>Fat content</b>: 5 labels for 2 values</summary>
-
-Standardised to `Low Fat` and `Regular`. Non-Consumables had been tagged Low Fat and are now `Non-Edible`.
-</details>
-
-<details>
-<summary><b>Outlet size</b>: three outlets with split values</summary>
-
-OUT010, OUT017 and OUT045 report several sizes each (OUT045 splits 329 Medium vs 326 Small). Taking the mode would overwrite 1,448 rows (17%), so these outlets are labelled `Unknown` and the original is kept in `Outlet Size (Original)`.
-</details>
-
-<details>
-<summary><b>Outliers</b>: kept, with reasons</summary>
-
-Sales and weight have none. The 144 visibility outliers reflect deliberate merchandising. The 1,931 rating outliers appear only because 39.18% of ratings sit at exactly 4.0, which makes the IQR very narrow.
-</details>
-
-<details>
-<summary><b>Engineered features</b></summary>
-
-`Item Category` (from the SKU prefix: FD, DR, NC) and `Outlet Age` (2026 minus establishment year).
-</details>
-
----
-
-## Limitations
-
-- **`Sales` is not transaction volume.** Conclusions concern catalogue value and pricing structure, not units sold.
-- **The $109k uplift is theoretical.** It assumes demand scales with listings, which dark-store space may not allow.
-- **Visibility imputation** slightly understates Grocery Store visibility.
-- **No timestamps**, so seasonality and trend forecasting are out of scope.
-
----
-
-## Getting started
-
-```bash
-git clone https://github.com/PoojaS-1616/data-analyst-portfolio.git
-cd data-analyst-portfolio/BlinkIT-Grocery-Sales-Analysis
-python -m pip install -r requirements.txt
-```
-
-**Option 1: notebook.** Open `BlinkIT_Grocery_Sales_Analysis_v2.ipynb` in Jupyter and run all cells. It reads the Excel file from its own folder and writes the cleaned CSV and figures.
-
-```bash
+Blinkit Grocery Pricing & Catalogue Analysis
+Exploratory data analysis of 8,523 product--outlet records across 10
+outlets using Python, statistical testing, SQL, and Streamlit.
+
+This project investigates product assortment, item-price patterns,
+outlet formats, category concentration, and data quality in a Blinkit
+grocery dataset.
+
+The central question is: What does the dataset's Sales column
+actually measure?
+
+The analysis finds that SKU identity explains approximately 99.97% of
+the observed variance in Sales ((R^2 = 0.9997)). This suggests that
+the field behaves more like an item-level price measure than
+transaction-level revenue. This interpretation should be confirmed
+against the original source documentation and relevant price fields
+before being treated as definitive.
+Important interpretation note: The dataset is an aggregated
+product--outlet snapshot without transaction quantities or timestamps.
+The analysis therefore describes catalogue and price patterns, not
+verified consumer spending, units sold, or realized revenue.
+
+Project at a glance
+- Records: 8,523 product--outlet combinations
+- Outlets: 10
+- Unique SKUs: 1,559
+- Item categories: 16
+- Cleaned dataset: 8,523 rows × 15 columns
+- Tools: Python, pandas, NumPy, Matplotlib, Seaborn, SciPy,
+  SQLite, SQL, Plotly, Streamlit
+Key findings
+1. SKU identity dominates variation in Sales
+SKU identity explains approximately 99.97% of the observed variance in
+the Sales column. This is consistent with an item-level price-like
+measure, but does not independently prove that the column is MRP.
+2. Grocery Stores have narrower assortments
+The analysis reports an average assortment of approximately 541.5 SKUs
+per Grocery Store, compared with 930 SKUs per Supermarket. Average
+item-price values are much closer than the assortment counts, suggesting
+that the observed total-value gap is primarily associated with catalogue
+breadth in this dataset.
+3. Store-format mix changes the apparent tier comparison
+Tier 2 appears to have the highest overall value in the initial
+comparison. When the comparison is restricted to Supermarkets, the
+reported averages are very similar across tiers. This is a composition
+effect: the mix of store formats affects the unadjusted comparison.
+4. Catalogue value is concentrated in a small number of categories
+The top five categories account for 59.03% of the summed Sales
+values, according to the analysis. Fruits & Vegetables and Snack Foods
+are the largest contributors.
+5. Correlations with several outlet and product attributes are weak
+The reported relationships between Sales and visibility, rating,
+outlet age, and item weight are small. In particular, a statistically
+significant result can still be practically negligible when the
+correlation coefficient is close to zero.
+Results summary
+  Metric                        Reported result
+  Sum of Sales values            1,201,681.49
+  Mean                                   140.99
+  Median                                 143.01
+  Standard deviation                      62.28
+  Minimum                                 31.29
+  Maximum                                266.89
+  Mean rating                          3.97 / 5
+  Records rated exactly 4.0              39.18%
+
+Currency: The source data does not clearly label the currency.
+Values are therefore presented as currency units, not dollars or
+rupees, until the source is verified.
+Outlet comparison
+  Store format              Outlets     Reported total Reported value per
+                                         Sales value outlet
+  Supermarket                     6         787,549.89 131,258.32
+  Type 1                                               
+
+  Supermarket                     1         131,477.78 131,477.78
+  Type 2                                               
+
+  Supermarket                     1         130,714.67 130,714.67
+  Type 3                                               
+  Grocery Store                   2         151,939.15 75,969.57
+These figures describe summed values in the Sales column. They should
+not be interpreted as verified store revenue unless the meaning of
+Sales is established from the original source.
+Methodology
+The project is organized around four objectives:
+1. Understand the business and dataset
+   - Review catalogue taxonomy and outlet structure.
+   - Establish baseline metrics and rating patterns.
+2. Improve data reliability
+   - Handle missing values and zero visibility values.
+   - Review duplicates and outliers.
+   - Harmonize inconsistent labels and outlet-size values.
+3. Explore patterns and associations
+   - Compare category and outlet groups.
+   - Examine correlations.
+   - Apply statistical tests, including Kruskal--Wallis tests.
+   - Compare top and bottom cohorts.
+4. Translate findings into decisions
+   - Measure category concentration.
+   - Compare outlets with store-format context.
+   - Identify assortment gaps.
+   - Develop candidate SKU recommendations.
+Statistical interpretation
+The reported 99.97% figure is a marginal, one-factor SKU-level
+(R^2). It should not be read as an independent contribution in a
+variance decomposition where all factors add up to 100%, because SKU
+identity overlaps with category and other product attributes.
+
+Multiple rows can represent the same SKU across different outlets.
+Statistical tests that treat every product--outlet row as independent
+may understate uncertainty. Results should therefore be treated as
+exploratory until dependence between repeated SKU observations is
+addressed in the inferential analysis.
+Recommendations
+1. Investigate assortment expansion at Grocery Stores. Use
+   missing-SKU lists as a shortlist for business review, then validate
+   space, availability, and demand before making changes.
+2. Monitor the largest categories. The top five categories
+   represent a substantial share of the summed Sales values in this
+   snapshot.
+3. Compare outlets within store format. Avoid attributing
+   differences to location tier when outlet formats are unevenly
+   represented.
+4. Interpret category differences as price-mix patterns. Average
+   values may reflect differences in the products stocked, not
+   necessarily stronger demand.
+5. Audit visibility against transaction data. The current dataset
+   cannot establish whether visibility affects units sold.
+6. Review rating quality. The concentration of records at a rating
+   of exactly 4.0 may warrant checking how ratings are collected or
+   rounded.
+7. Standardize master data. Review inconsistent fat-content labels,
+   conflicting outlet-size values, and other catalogue inconsistencies.
+8. Validate high-value SKU distribution. Prioritize candidate
+   products for review, but do not interpret catalogue value as demand
+   without transaction data.
+Illustrative assortment scenario
+The notebook estimates a theoretical catalogue-value opportunity of
+109,008.97 (reported notebook output; verify before publication)
+based on its assortment-gap assumptions and unrounded values. Treat this
+as an illustrative scenario, not an incremental revenue forecast: it
+assumes additional listings can be added and that the Sales value is a
+suitable proxy for the value of those listings.
+Before publishing, confirm the exact unrounded output in the notebook
+and replace the temporary figure above with that verified value. The
+README draft intentionally flags this figure for verification rather
+than presenting an unchecked number as a fact.
+
+SQL warehouse and dashboard
+The project includes a SQLite warehouse designed around a star schema.
+  Table or view                      Purpose
+  dim_products                     Product attributes such as family,
+                                     category, fat content, and weight
+
+  dim_outlets                      Outlet attributes such as format,
+                                     tier, size, establishment year,
+                                     and age
+
+  fact_inventory_pricing           Product--outlet records with the
+                                     analysed Sales field,
+                                     visibility, and rating
+
+  vw_sku_pricing_variance          Variation in Sales by SKU
+
+  vw_outlet_assortment_gap         Assortment breadth comparison by
+                                     outlet format
+
+  vw_format_controlled_tiers       Tier comparisons within the same
+                                     store format
+
+  vw_category_pareto               Category concentration and
+                                     cumulative shares
+
+  vw_missing_sku_prioritization    Candidate SKUs present in
+                                     supermarkets but missing from
+                                 Grocery Stores
+The Streamlit dashboard includes:
+- Assortment Expansion Simulator
+- Pricing Variance & MRP Proof
+- Tier Comparison Audit
+- SKU Recommendation Engine
+- SQL Star Schema Explorer
+Dashboard link: Add your deployed Streamlit URL here when available.
+Until then, run the app locally using the instructions below.
+Data cleaning decisions
+The analysis documents the following data-quality issues:
+- Missing item weights: 1,463 rows (17.16%)
+- Zero item-visibility values: 526 rows
+- Inconsistent fat-content labels
+- Conflicting outlet-size values for some outlets
+- Outliers retained where removal was not justified
+Please refer to the notebook for the specific imputation and
+harmonization rules applied to each field. These decisions should be
+reviewed alongside the analysis because imputation can influence
+comparisons between outlet types.
+Limitations
+- The meaning of Sales is not established by the field name
+  alone. The variance pattern suggests a price-like measure, but
+  source documentation or cross-checking against MRP is needed to
+  confirm it.
+- No transaction quantities are available. Units sold, conversion,
+  realized revenue, and demand cannot be measured directly.
+- No timestamps are available. Seasonality, trends, and
+  time-series forecasting are out of scope.
+- The assortment opportunity is theoretical. More listings do not
+  guarantee demand or incremental revenue, and outlet space may
+  constrain expansion.
+- Statistical independence needs care. Repeated SKUs across
+  outlets can affect the uncertainty of tests that operate on
+  product--outlet rows.
+- Currency is unlabelled. Values are reported as currency units
+  until verified from the source.
+Getting started
+Requirements
+Use a Python environment compatible with the packages listed in
+requirements.txt.
+Option 1: Run the notebook
 jupyter notebook BlinkIT_Grocery_Sales_Analysis_v2.ipynb
-```
-
-**Option 2: script.** Run the whole analysis from the command line. It writes `BlinkIT_Grocery_Data_Cleaned.csv` and the figures in `visuals/`.
-
-```bash
+Run the notebook cells in order. Confirm that the raw Excel workbook is
+in the expected folder before running the analysis.
+Option 2: Run the analysis script
+python -m pip install -r requirements.txt
 python run_analysis.py
-```
-
-**Option 3: dashboard.** Start the Streamlit app. If `blinkit_warehouse.db` is missing, the app builds it from the cleaned CSV on first run.
-
-```bash
+The script is intended to write the cleaned CSV and visual outputs.
+Check the paths configured in the script before running it.
+Option 3: Run the Streamlit dashboard
+python -m pip install -r requirements.txt
 streamlit run app.py
-```
-
----
-
-## Repository structure
-
-```
+If the SQLite database is not present, the app may build it from the
+cleaned CSV, depending on the repository configuration. Ensure the
+required input file exists before starting the app.
+Repository structure
 BlinkIT-Grocery-Sales-Analysis/
-├── BlinkIT Grocery Data.xlsx                 # raw data
-├── BlinkIT_Grocery_Data_Cleaned.csv          # cleaned data (8,523 rows x 15 columns)
-├── BlinkIT_Grocery_Sales_Analysis_v2.ipynb   # full analysis notebook
-├── run_analysis.py                           # same analysis as a script
-├── blinkit_warehouse.sql                     # star schema and analytical views
-├── build_warehouse.py                        # builds the SQLite database
-├── app.py                                    # Streamlit dashboard
+├── BlinkIT Grocery Data.xlsx
+├── BlinkIT_Grocery_Data_Cleaned.csv
+├── BlinkIT_Grocery_Sales_Analysis_v2.ipynb
+├── run_analysis.py
+├── blinkit_warehouse.sql
+├── build_warehouse.py
+├── app.py
 ├── requirements.txt
 ├── dashboard_live_screenshot.png
 ├── dashboard_preview.png
-├── visuals/                                  # figures from the analysis
+├── visuals/
 └── README.md
-```
-
----
-
-**Author:** Pooja Singh · Built with Python, pandas, NumPy, Matplotlib, Seaborn, SciPy, SQL (SQLite), Plotly and Streamlit
+Tools used
+Python · pandas · NumPy · Matplotlib · Seaborn · SciPy · SQL · SQLite ·
+Plotly · Streamlit
+Author
+Pooja Singh
+Portfolio note: This is an exploratory analysis of an aggregated
+catalogue snapshot. Findings are descriptive and should not be
+interpreted as causal or as verified revenue results without
+transaction-level and source-definition evidence.
