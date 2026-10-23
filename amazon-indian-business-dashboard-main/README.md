@@ -4,7 +4,7 @@ An Excel dashboard that turns 10,000 Amazon India orders into a single dashboard
 
 ## Dashboard Preview
 
-![Amazon India Business Performance Dashboard](./Amazon_India_Dashboard_Preview.png)
+![Amazon India Business Performance Dashboard](./Amazon_Indian_Dashboard_Preview.png)
 
 ## What it answers
 
