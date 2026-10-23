@@ -56,24 +56,30 @@ Recorded sales value and profit by payment method and fulfilment method, plus re
 
 ## How it's built
 
-The dashboard is driven by formulas. The `Raw_Data` sheet holds the orders, small helper sheets summarise them with SUMIFS and COUNTIFS, and the dashboard's KPIs and charts read from those helpers.
+The `Raw_Data` sheet stores the orders in an Excel Table named `RawData`. Summary formulas use table references, so additional records are included when they become part of this table.
 
-If the raw data changes, the numbers and charts update on their own.
+The `Order_Month` calculated column derives a monthly grouping label from each order date.
 
-| Sheet                                                        | What it does                                          |
-| ------------------------------------------------------------ | ----------------------------------------------------- |
-| `Dashboard`                                                  | The one-sheet view: KPIs, charts and four sections |
-| `Raw_Data`                                                   | The 10,000 orders, plus an `Order_Month` helper column (text such as `2024-04`)|
-| Monthly_KPIs, Category_Analysis, Top_Products                | Summary tables behind sections 1 and 2                |
-| Order_Status, Category_Returns_Cancellations                 | Summary tables behind section 3                       |
-| Payment_Analysis, Fulfillment_Analysis, State_Analysis       | Summary tables behind section 4                       |
----
+| Sheet | Purpose |
+|---|---|
+| `Dashboard` | KPIs and charts answering four business questions |
+| `Raw_Data` | Source records and the calculated `Order_Month` column |
+| `Monthly_KPIs`, `Category_Analysis` | Monthly and category summaries |
+| `Product_Summary` | PivotTable ranking the top 10 products by recorded sales value |
+| `Top_Products` | Links the ranked products to the dashboard chart |
+| `Order_Status`, `Category_Returns_Cancellations` | Order counts, status shares and category comparisons |
+| `Payment_Analysis`, `Fulfillment_Analysis`, `State_Analysis` | Summaries by payment method, fulfilment method and state |
 
-- **What updates automatically:** if order values change, the totals and charts recalculate. The formulas read Raw_Data rows 2 to 10,001.
+### Updating the dashboard
 
-- **What does not:** the lists of months, categories, products, payment methods and states are typed in, so new categories or states must be added by hand. The Top 10 products list is also typed in and will not re-rank by itself.
+- With Excel calculation set to **Automatic**, formula-based summaries recalculate when the table data changes.
+- Select **Data → Refresh All** to update the product PivotTable and Top 10 ranking. The PivotTable is also configured to refresh when the workbook opens.
+- New records must be included within the `RawData` table.
 
----
+### Current limitations
+
+- Lists of months, categories, payment methods, fulfilment methods, states and order statuses are maintained manually. New labels require corresponding helper rows, formulas and chart-range updates.
+- The dashboard's date-range and order-count subtitle is typed text and must be updated when the dataset changes.
 
 ## The dataset
 
@@ -85,14 +91,16 @@ If the raw data changes, the numbers and charts update on their own.
 
 ## Tools
 
-**Microsoft Excel:** SUMIFS, COUNTIFS, helper sheets and charts.
+**Microsoft Excel:** Excel Tables, structured references, SUMIFS, COUNTIFS, TEXT, INDEX/MATCH, PivotTables and charts.
 
 ## Using it
 
-1. Download `Amazon_India_Business_Performance_Dashboard.xlsx` from this repository.
-2. Open it in Excel and go to the **Dashboard** sheet.
-3. To try your own data, paste it into `Raw_Data` using the same columns, including `Order_Month` in the format `YYYY-MM`. The formulas stop at row 10,001, so if you add more orders, extend the ranges in the helper sheets and Dashboard too. Keep the same categories, states and months, or add new ones to the helper sheets.
-4. Press Ctrl + Alt + F9 to recalculate if the numbers do not refresh.
+1. Download [the Excel workbook](./Amazon_India_Business_Performance_Dashboard.xlsx?raw=true) and open it in Microsoft Excel.
+2. Go to the **Dashboard** sheet. Set **Formulas → Calculation Options → Automatic** so formulas recalculate when data changes.
+3. To add records, extend the `RawData` table on the `Raw_Data` sheet. Preserve the column headers, enter `Order_Date` as an Excel date, and check that the `Order_Month` formula fills into the new rows.
+4. After changing data, select **Data → Refresh All** to refresh the product PivotTable and Top 10 ranking. If formula results remain unchanged, press **Ctrl + Alt + F9** to force recalculation.
+5. If you introduce new months or grouping labels, update the relevant helper lists, formulas and chart ranges. Update the dashboard's typed date-range and order-count subtitle when needed.
+6. Check the dashboard totals and product ranking, then save the workbook.
 
 ## What I learned
 
