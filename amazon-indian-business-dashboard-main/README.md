@@ -95,7 +95,7 @@ The `Order_Month` calculated column derives a monthly grouping label from each o
 
 ## Using it
 
-1. Download ![the Excel workbook](./Amazon_India_Business_Performance_Dashboard.xlsx?raw=true) and open it in Microsoft Excel.
+1. Download [the Excel workbook](https://raw.githubusercontent.com/PoojaS-1616/data-analyst-portfolio/main/amazon-indian-business-dashboard-main/Amazon_India_Business_Performance_Dashboard.xlsx) and open it in Microsoft Excel.
 2. Go to the **Dashboard** sheet. Set **Formulas → Calculation Options → Automatic** so formulas recalculate when data changes.
 3. To add records, extend the `RawData` table on the `Raw_Data` sheet. Preserve the column headers, enter `Order_Date` as an Excel date, and check that the `Order_Month` formula fills into the new rows.
 4. After changing data, select **Data → Refresh All** to refresh the product PivotTable and Top 10 ranking. If formula results remain unchanged, press **Ctrl + Alt + F9** to force recalculation.
