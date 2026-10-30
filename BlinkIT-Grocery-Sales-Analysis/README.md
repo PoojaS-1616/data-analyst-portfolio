@@ -167,22 +167,52 @@ pie showData
 
 ## 🗂️ Project Structure
 
-
+```text
 BlinkIT-Grocery-Sales-Analysis/
-├── app.py                                 # Interactive Streamlit Executive Assortment Simulator & Decision Suite
-├── blinkit_warehouse.sql                 # Production ANSI SQL Dimensional Warehouse Schema (DDL + 5 Analytical Views)
-├── build_warehouse.py                     # Automated SQLite ETL pipeline & query verification engine
-├── BlinkIT_Grocery_Sales_Analysis.ipynb   # Main Jupyter Analysis Notebook (All 4 Objectives & 16 Tasks)
-├── BlinkIT_Grocery_Sales_Analysis_v2.ipynb# Extended Interactive Visualizations Notebook
-├── BlinkIT_Grocery_Data_Cleaned.csv      # Standardized Cleaned Dataset (8,523 rows x 15 columns, 0 nulls)
-├── BlinkIT Grocery Data.xlsx             # Primary Raw Dataset
-├── Project_Explanation.md                # In-depth Technical Manual, Math Derivations & Interview Defense Guide
-├── Blinkit_Complete_File_by_File_Manual.md# Granular File-by-File Technical Guide & Workflow Architecture
-├── README.md                             # Comprehensive Executive Documentation & Project Summary
-├── requirements.txt                      # Project Dependency Specification
-├── run_analysis.py                       # Automated Standalone Execution Pipeline
-├── dashboard_live_screenshot.png         # Live Streamlit Dashboard Interface Screenshot
-└── visuals/                              # Directory Containing 10 High-Resolution Exported Figures (13 Panels)
+│
+├── app.py
+│   └── Interactive Streamlit Executive Assortment Simulator & Decision Suite
+│
+├── blinkit_warehouse.sql
+│   └── Production-ready ANSI SQL Dimensional Warehouse Schema
+│       (DDL + 5 Analytical Views)
+│
+├── build_warehouse.py
+│   └── Automated SQLite ETL Pipeline & Query Verification Engine
+│
+├── BlinkIT_Grocery_Sales_Analysis.ipynb
+│   └── Main Jupyter Analysis Notebook (4 Objectives & 16 Tasks)
+│
+├── BlinkIT_Grocery_Sales_Analysis_v2.ipynb
+│   └── Extended Interactive Visualizations Notebook
+│
+├── BlinkIT_Grocery_Data_Cleaned.csv
+│   └── Standardized Cleaned Dataset (8,523 Rows × 15 Columns, 0 Nulls)
+│
+├── Blinkit Grocery Data.xlsx
+│   └── Primary Raw Dataset
+│
+├── Project_Explanation.md
+│   └── Technical Manual, Mathematical Derivations & Interview Defense Guide
+│
+├── Blinkit_Complete_File_by_File_Manual.md
+│   └── Detailed File-by-File Technical Guide & Workflow Architecture
+│
+├── README.md
+│   └── Project Documentation & Executive Summary
+│
+├── requirements.txt
+│   └── Project Dependencies
+│
+├── run_analysis.py
+│   └── Automated Standalone Execution Pipeline
+│
+├── dashboard_live_screenshot.png
+│   └── Live Streamlit Dashboard Interface Screenshot
+│
+└── visuals/
+    └── 10 High-Resolution Exported Figures (13 Visualization Panels)
+```
 
 ---
 
