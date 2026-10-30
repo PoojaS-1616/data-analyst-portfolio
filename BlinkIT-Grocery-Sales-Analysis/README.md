@@ -167,7 +167,7 @@ pie showData
 
 ## 🗂️ Project Structure
 
-`	ext
+`
 BlinkIT-Grocery-Sales-Analysis/
 ├── app.py                                 # Interactive Streamlit Executive Assortment Simulator & Decision Suite
 ├── blinkit_warehouse.sql                 # Production ANSI SQL Dimensional Warehouse Schema (DDL + 5 Analytical Views)
