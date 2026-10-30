@@ -8,12 +8,15 @@ Architecture: Integrated with SQLite Dimensional Star Schema (blinkit_warehouse.
 """
 
 import os
+import sys
 import sqlite3
 import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # ------------------------------------------------------------------------------
 # PAGE CONFIGURATION & STYLING
@@ -80,7 +83,9 @@ st.markdown("""
 # ------------------------------------------------------------------------------
 @st.cache_data
 def load_data():
-    csv_path = 'BlinkIT_Grocery_Data_Cleaned.csv'
+    csv_path = os.path.join(BASE_DIR, 'BlinkIT_Grocery_Data_Cleaned.csv')
+    if not os.path.exists(csv_path):
+        csv_path = 'BlinkIT_Grocery_Data_Cleaned.csv'
     if not os.path.exists(csv_path):
         st.error(f"Dataset '{csv_path}' not found. Please ensure it exists in the workspace.")
         st.stop()
@@ -89,9 +94,13 @@ def load_data():
 
 @st.cache_resource
 def get_db_connection():
-    db_path = 'blinkit_warehouse.db'
+    db_path = os.path.join(BASE_DIR, 'blinkit_warehouse.db')
+    if not os.path.exists(db_path):
+        db_path = 'blinkit_warehouse.db'
     if not os.path.exists(db_path):
         # Auto-build warehouse if db is missing
+        if BASE_DIR not in sys.path:
+            sys.path.insert(0, BASE_DIR)
         import build_warehouse
         build_warehouse.build_warehouse()
     conn = sqlite3.connect(db_path, check_same_thread=False)
@@ -109,10 +118,10 @@ with st.sidebar:
     st.caption("Quick-Commerce Dark Store Economics & Catalogue Strategy")
     st.markdown("---")
 
-    st.subheader("🛠️ Global Portfolio Levers")
-    currency = st.radio("Display Currency Metric", ["$ (USD Normalized)", "₹ (INR Estimated 1:83)"])
-    rate = 83.0 if "INR" in currency else 1.0
-    symbol = "₹" if "INR" in currency else "$"
+    st.subheader("Dataset units")
+    st.caption("Currency is not specified in the source. Values are shown without conversion.")
+    rate = 1.0
+    symbol = ""
 
     st.markdown("---")
     st.markdown("### 🎯 Executive Navigation")
@@ -126,21 +135,12 @@ with st.sidebar:
 # ------------------------------------------------------------------------------
 # HEADER & NETWORK METRICS
 # ------------------------------------------------------------------------------
-def format_compact_currency(amount, sym):
-    if sym == "₹":
-        if abs(amount) >= 1e7:
-            return f"₹{amount/1e7:.2f} Cr"
-        elif abs(amount) >= 1e5:
-            return f"₹{amount/1e5:.2f} Lakh"
-        else:
-            return f"₹{amount:,.2f}"
-    else:
-        if abs(amount) >= 1e6:
-            return f"${amount/1e6:.2f}M"
-        elif abs(amount) >= 1e3:
-            return f"${amount/1e3:.1f}k"
-        else:
-            return f"${amount:,.2f}"
+def format_compact_currency(amount, sym=""):
+    if abs(amount) >= 1_000_000:
+        return f"{amount / 1_000_000:.2f}M"
+    elif abs(amount) >= 1_000:
+        return f"{amount / 1_000:.1f}k"
+    return f"{amount:,.2f}"
 
 st.title("⚡ Blinkit Catalogue Pricing & Assortment Decision Suite")
 st.markdown(
@@ -154,8 +154,9 @@ avg_unit_mrp = df['Sales'].mean() * rate
 total_skus = df['Item Identifier'].nunique()
 total_stores = df['Outlet Identifier'].nunique()
 
-col1.metric("Total Catalogue Value", format_compact_currency(total_catalogue_value, symbol), "+9.07% potential gap")
-col2.metric("Mean Unit Retail Price (MRP)", f"{symbol}{avg_unit_mrp:,.2f}", f"Parity across stores: ±{symbol}{1.85*rate:.2f}")
+within_sku_sd = df.groupby('Item Identifier')['Sales'].std().mean() * rate
+col1.metric("Sum of Sales (all listings)", format_compact_currency(total_catalogue_value, symbol), "+9.07% potential gap")
+col2.metric("Mean Sales Value per Listing", f"{symbol}{avg_unit_mrp:,.2f}", f"Avg within-SKU SD: {within_sku_sd:.2f}")
 col3.metric("Network SKU Depth", f"{total_skus:,} SKUs", "16 Item Categories")
 col4.metric("Fulfillment Outlets", f"{total_stores} Dark Stores", "8 Supermarkets · 2 Grocery Stores")
 
@@ -164,7 +165,7 @@ col4.metric("Fulfillment Outlets", f"{total_stores} Dark Stores", "8 Supermarket
 # ------------------------------------------------------------------------------
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "📈 Assortment Expansion Simulator", 
-    "🔬 Pricing Variance & MRP Proof",
+    "🔬 Sales Variance Decomposition",
     "⚖️ Simpson's Paradox (Tier 2 Audit)", 
     "🎯 SKU Recommendation Engine",
     "🗄️ SQL Star Schema Explorer"
@@ -178,7 +179,11 @@ with tab1:
     st.markdown(
         "Grocery stores (`OUT010` and `OUT019`) currently stock only ~**541.5 SKUs** compared to "
         "~**930.0 SKUs** in Supermarket dark stores. This interactive simulator models the working "
-        "catalogue-value potential of closing this assortment gap; actual demand and gross margin are not available in this dataset."
+        "capital, sales potential, and gross margin of closing this assortment gap."
+    )
+    st.caption(
+        "Illustrative scenario: catalogue value uses the mean `Sales` value per listing (units and currency unspecified), "
+        "and turns, margin and holding cost are your own assumptions. The dataset has no units sold, so this is not a demand forecast."
     )
 
     sim_col1, sim_col2 = st.columns([1, 2])
@@ -222,7 +227,7 @@ with tab1:
 
         m_col1, m_col2, m_col3 = st.columns(3)
         m_col1.metric("Catalogue Value Added", format_compact_currency(incremental_inventory_value, symbol), f"+{(incremental_inventory_value/current_val)*100:.1f}% expansion")
-        m_col2.metric("Annual Sales Velocity", format_compact_currency(annual_gross_merchandise_value, symbol), f"{inventory_turns_per_year:.0f} turns/yr")
+        m_col2.metric("Modelled Annual Sales", format_compact_currency(annual_gross_merchandise_value, symbol), f"{inventory_turns_per_year:.0f} turns/yr")
         m_col3.metric("Net Annual Contribution", format_compact_currency(net_annual_operating_contribution, symbol), f"After {holding_cost_pct*100:.1f}% holding cost")
 
         # Visualizing before and after
@@ -253,15 +258,10 @@ with tab1:
     """, unsafe_allow_html=True)
 
 # ==============================================================================
-# TAB 2: PRICING VARIANCE & MRP PROOF
+# TAB 2: SALES VARIANCE DECOMPOSITION
 # ==============================================================================
 with tab2:
-    st.header("🔬 Empirical Variance Decomposition: The 'Sales is MRP' Proof")
-    st.markdown(
-        "A foundational analytical error in retail analysis is assuming the `Sales` column represents total consumer revenue volume. "
-        "Our mathematical decomposition proves that **99.97% of variance is explained by the SKU alone**, establishing that `Sales` "
-        "is effectively **Item Maximum Retail Price (MRP)**."
-    )
+    st.header("🔬 Variance Decomposition: What Does Sales Represent?")
 
     # Variance decomposition calculation
     grand_mean = df['Sales'].mean()
@@ -277,6 +277,13 @@ with tab2:
     outlet_means = df.groupby('Outlet Identifier')['Sales'].transform('mean')
     ss_outlet = ((outlet_means - grand_mean) ** 2).sum()
     r2_outlet = ss_outlet / ss_total
+
+    st.markdown(
+        "`Sales` behaves like a per-item price rather than consumer revenue volume: "
+        f"**{r2_sku * 100:.2f}% of its variance is explained by `Item Identifier` alone**. "
+        "This supports a price-like interpretation, but does not establish that the column is MRP. "
+        "The source does not specify the currency, so values are shown in original dataset units."
+    )
 
     v_col1, v_col2 = st.columns([1, 1])
 
@@ -300,9 +307,9 @@ with tab2:
         st.plotly_chart(fig_decomp, use_container_width=True)
 
     with v_col2:
-        st.subheader("SKU-Level Price Consistency Inspector")
+        st.subheader("SKU-Level Consistency Inspector")
         sample_skus = df['Item Identifier'].value_counts().head(10).index.tolist()
-        selected_sku = st.selectbox("Inspect SKU Price across Stores", sample_skus)
+        selected_sku = st.selectbox("Inspect SKU Sales Value across Stores", sample_skus)
         sku_records = df[df['Item Identifier'] == selected_sku][['Outlet Identifier', 'Outlet Type', 'Sales']]
         sku_records['Sales'] = sku_records['Sales'] * rate
 
@@ -312,18 +319,18 @@ with tab2:
             y='Sales', 
             color='Outlet Type',
             size=[14]*len(sku_records),
-            title=f"Unit Retail Price Dispersion for SKU: {selected_sku}",
-            labels={'Sales': f'Price ({symbol})'}
+            title=f"Sales Value by Outlet for SKU: {selected_sku}",
+            labels={'Sales': 'Sales value (dataset units)'}
         )
         fig_sku.update_layout(height=350)
         st.plotly_chart(fig_sku, use_container_width=True)
 
     st.markdown(f"""
     <div class="warning-box">
-        <b>Mathematical Consequence:</b> The within-SKU standard deviation is only <b>{symbol}{df.groupby('Item Identifier')['Sales'].std().mean()*rate:.2f}</b>, 
-        compared to the overall dataset standard deviation of <b>{symbol}{df['Sales'].std()*rate:.2f}</b>. 
-        Because each record represents an item listed at an outlet with near-zero cross-store price variance, store sales totals 
-        reflect <b>catalogue assortment breadth</b>, not purchasing velocity.
+        <b>What this means:</b> The average within-SKU standard deviation is only <b>{symbol}{df.groupby('Item Identifier')['Sales'].std().mean()*rate:.2f}</b>, 
+        compared with <b>{symbol}{df['Sales'].std()*rate:.2f}</b> overall. 
+        The same SKUs recur across outlets and the dataset has no units-sold field, so store totals largely track 
+        <b>which SKUs are listed (assortment breadth)</b> rather than purchasing velocity.
     </div>
     """, unsafe_allow_html=True)
 
@@ -356,7 +363,7 @@ with tab3:
             text=naive_df['Revenue_Per_Store'].apply(lambda x: f"{symbol}{x:,.0f}"),
             color='Outlet Location Type',
             color_discrete_sequence=['#dc3545', '#28a745', '#ffc107'],
-            title="Naive Sales-Column Value per Store by Location Tier (Misleading)"
+            title="Naive Average Store Revenue by Location Tier (Misleading)"
         )
         fig_naive.update_layout(height=400, showlegend=False)
         st.plotly_chart(fig_naive, use_container_width=True)
@@ -374,17 +381,23 @@ with tab3:
             text=controlled_df['Revenue_Per_Supermarket'].apply(lambda x: f"{symbol}{x:,.0f}"),
             color='Outlet Location Type',
             color_discrete_sequence=['#007bff', '#007bff', '#007bff'],
-            title="Supermarkets-Only Sales-Column Value per Store (Format Controlled)"
+            title="Supermarkets-Only Revenue Per Store (Format Controlled)"
         )
         fig_controlled.update_layout(height=400, showlegend=False)
         st.plotly_chart(fig_controlled, use_container_width=True)
-        st.success("✅ Robust Finding: When controlling for store format, Sales-column value per supermarket is nearly identical (~$131,000) across all urban tiers.")
+        rev_vals = controlled_df['Revenue_Per_Supermarket']
+        spread_pct = (rev_vals.max() - rev_vals.min()) / rev_vals.mean() * 100
+        st.success(
+            f"✅ Format-controlled view: average Sales total per supermarket ranges from {rev_vals.min():,.0f} "
+            f"to {rev_vals.max():,.0f} across location tiers (a spread of {spread_pct:.1f}% of the mean). "
+            "These are descriptive totals, not a significance test."
+        )
 
     st.markdown("""
     <div class="insight-box">
         <b>Why this happened:</b> Tier 2 contains <b>zero Grocery Stores</b> (3 Supermarkets only), while Tier 1 contains 1 Grocery Store (OUT019) 
         and Tier 3 contains 1 Grocery Store (OUT010). Because Grocery Stores carry only ~541 SKUs (vs ~930 in Supermarkets), 
-        their inclusion dragged down Tier 1 and Tier 3 averages. <b>This is a composition effect, not consumer demand variance.</b>
+        their inclusion dragged down Tier 1 and Tier 3 averages. <b>The gap reflects store composition (listing counts), not evidence of demand differences between tiers.</b>
     </div>
     """, unsafe_allow_html=True)
 
@@ -412,7 +425,6 @@ with tab4:
     """
     missing_df = pd.read_sql_query(query_missing, conn)
     missing_df['mean_mrp'] = missing_df['mean_mrp'] * rate
-    missing_df['expansion_priority_score'] = missing_df['expansion_priority_score'] * rate
 
     rec_col1, rec_col2 = st.columns([1, 2])
 
@@ -435,8 +447,8 @@ with tab4:
             color='item_type',
             size='supermarket_presence',
             hover_data=['item_identifier', 'avg_rating'],
-            title="Expansion Priority Score vs. Unit Price (MRP)",
-            labels={'mean_mrp': f'Mean MRP ({symbol})', 'expansion_priority_score': 'Priority Score'}
+            title="Expansion Priority Score vs. Mean Sales Value",
+            labels={'mean_mrp': 'Mean Sales value (dataset units)', 'expansion_priority_score': 'Priority Score'}
         )
         fig_scatter.update_layout(height=380)
         st.plotly_chart(fig_scatter, use_container_width=True)
@@ -444,8 +456,8 @@ with tab4:
     st.subheader(f"Recommended Onboarding Queue ({len(filtered_missing)} Candidate SKUs)")
     st.dataframe(
         filtered_missing.style.format({
-            'mean_mrp': f'{symbol}{{:,.2f}}',
-            'expansion_priority_score': f'{symbol}{{:,.2f}}',
+            'mean_mrp': '{:,.2f}',
+            'expansion_priority_score': '{:,.2f}',
             'avg_rating': '{:.2f}'
         }),
         use_container_width=True
