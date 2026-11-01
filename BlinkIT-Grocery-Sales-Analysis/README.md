@@ -174,7 +174,7 @@ BlinkIT-Grocery-Sales-Analysis/
 │   └── Interactive Streamlit Executive Assortment Simulator & Decision Suite
 │
 ├── blinkit_warehouse.sql
-│   └── Production-ready ANSI SQL Dimensional Warehouse Schema
+│   └── SQLite Dimensional Warehouse Schema with 5 Analytical Views
 │       (DDL + 5 Analytical Views)
 │
 ├── build_warehouse.py
@@ -191,8 +191,6 @@ BlinkIT-Grocery-Sales-Analysis/
 │
 ├── Blinkit Grocery Data.xlsx
 │   └── Primary Raw Dataset
-│
-├── Production-ready ANSI SQL Dimensional Warehouse Schema
 │
 ├── README.md
 │   └── Project Documentation & Executive Summary
@@ -251,14 +249,6 @@ BlinkIT-Grocery-Sales-Analysis/
 2. Open the Jupyter Notebook to review the analysis.
 3. Inspect the cleaned dataset and SQL/SQLite files if included.
 4. Run the Streamlit dashboard if its application file and dependencies are available.
-
-### Interactive project
-
-If you publish the interactive HTML page using GitHub Pages, add its live URL here:
-
-**[🌐 Open the Interactive Blinkit Analysis](YOUR_GITHUB_PAGES_URL)**
-
-Replace `YOUR_GITHUB_PAGES_URL` with the actual published website URL. This link will not work until the site is deployed.
 
 ---
 
