@@ -3,7 +3,8 @@ Blinkit Quick-Commerce Catalogue Architecture & Dark Store Assortment Simulator
 ==============================================================================
 Production Streamlit Executive Dashboard & Decision Engine
 ------------------------------------------------------------------------------
-Author: Candidate Portfolio (Senior Data Analyst / Junior Data Scientist Track)
+Project: BlinkIT Grocery Sales & Assortment Analysis
+Developed by: Pooja Singh
 Architecture: Integrated with SQLite Dimensional Star Schema (blinkit_warehouse.db)
 """
 
