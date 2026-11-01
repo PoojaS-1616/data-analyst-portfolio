@@ -192,11 +192,7 @@ BlinkIT-Grocery-Sales-Analysis/
 ├── Blinkit Grocery Data.xlsx
 │   └── Primary Raw Dataset
 │
-├── Project_Explanation.md
-│   └── Technical Manual, Mathematical Derivations & Interview Defense Guide
-│
-├── Blinkit_Complete_File_by_File_Manual.md
-│   └── Detailed File-by-File Technical Guide & Workflow Architecture
+├── Production-ready ANSI SQL Dimensional Warehouse Schema
 │
 ├── README.md
 │   └── Project Documentation & Executive Summary
