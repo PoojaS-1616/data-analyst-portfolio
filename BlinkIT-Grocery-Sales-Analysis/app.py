@@ -131,7 +131,7 @@ with st.sidebar:
         "SKU assortment breadth, inventory holding costs, and format economics."
     )
     st.markdown("---")
-    st.caption("Flagship Portfolio Project · Pair Programming Production Suite")
+    st.caption("Flagship Portfolio Project · Interactive Decision Support Suite")
 
 # ------------------------------------------------------------------------------
 # HEADER & NETWORK METRICS
